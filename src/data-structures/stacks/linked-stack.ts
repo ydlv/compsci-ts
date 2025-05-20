@@ -1,8 +1,8 @@
-import { NoSuchElementError } from "../errors/no-such-element.error";
-import { LinkedNode } from "./node-types";
-import { Stack } from "./stack";
+import { NoSuchElementError } from "../../errors/no-such-element.error";
+import { LinkedNode } from "../node-types";
+import { Stack } from "./stack.interface";
 
-export class NodeStack<T> implements Stack<T> {
+export class LinkedStack<T> implements Stack<T> {
     private top?: LinkedNode<T>;
 
     constructor() {
