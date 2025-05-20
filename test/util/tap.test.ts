@@ -1,0 +1,29 @@
+import { tap } from '../../src/util/tap';
+
+describe('tap', () => {
+    it('returns the given object', () => {
+        const x = Symbol("hello");
+        expect(tap(x, () => {})).toBe(x);
+    });
+
+    it('performs the callback', () => {
+        const ref = {done: false};
+        tap(0, () => ref.done = true);
+        expect(ref.done).toBe(true);
+    });
+
+    it('performs the given callback before returning', () => {
+        const refA = {value: 0};
+        
+        const refB = {value: -9};
+
+        const ob = {
+            fun() {
+                refB.value = refA.value;
+            }
+        }
+
+        tap(ob, () => refA.value = 2).fun();
+        expect(refB.value).toBe(2); // will work if and only if the callback to tap was called before .fun()
+    }); 
+});
