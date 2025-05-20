@@ -3,4 +3,5 @@ export interface Stack<T> {
     isEmpty(): boolean;
     peek(): T;
     pop(): T;
+    readonly length: number;
 }

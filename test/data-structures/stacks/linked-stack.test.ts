@@ -57,4 +57,38 @@ describe('Linked', () => {
         const stack = new LinkedStack();
         expect(() => stack.peek()).toThrow();
     });
+
+    it('has length 0 when initialized', () => {
+        const stack: Stack<any> = new LinkedStack();
+        expect(stack.length).toBe(0);
+    });
+
+    it('has length 0 when empty', () => {
+        const stack: Stack<any> = new LinkedStack();
+        stack.push(1);
+        stack.pop();
+        expect(stack.length).toBe(0);
+        stack.push(1);
+        stack.push(2);
+        stack.pop();
+        stack.pop();
+        expect(stack.length).toBe(0);
+    });
+
+    it('has correct length', () => {
+        const operations: ('+' | '-')[] = "+-++-+-+--".split("")  as ('+' | '-')[];
+        var expectedLength = 0;
+        const stack: Stack<1> = new LinkedStack();
+        for(const op of operations) {
+            if(op == '+') {
+                stack.push(1);
+                expectedLength++;
+            } else {
+                stack.pop();
+                expectedLength--;
+            }
+
+            expect(stack.length).toEqual(expectedLength);
+        }
+    });
 });

@@ -4,16 +4,25 @@ import { Stack } from "./stack.interface";
 
 export class LinkedStack<T> implements Stack<T> {
     private top?: LinkedNode<T>;
+    private _length: number;
 
     constructor() {
         this.top = undefined;
+        this._length = 0;
     }
+
+    
+    public get length() : number {
+        return this._length;
+    }
+    
 
     push(value: T): void {
         this.top = {
             value: value,
             next: this.top
         };
+        this._length++;
     }
 
     isEmpty(): boolean {
@@ -29,6 +38,7 @@ export class LinkedStack<T> implements Stack<T> {
         this.assertNonEmpty();
         const ret = this.top!.value;
         this.top = this.top!.next;
+        this._length--;
         return ret;
     }
 
