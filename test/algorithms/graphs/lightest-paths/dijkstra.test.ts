@@ -16,4 +16,10 @@ describe("dijkstra", () => {
         expect(tree.get("E")).toEqual(["A", 1]);
         expect(tree.get("F")).toEqual(["D", 4]);
     });
+
+    it("throws when graph has negative edge", () => {
+        const g = example0();
+        g.setEdge({from: "A", to: "B", weight: -1});
+        expect(() => dijkstra(g, "A", w => w.weight)).toThrow(/^.*negative.*-1.*$/ig);
+    });
 });
