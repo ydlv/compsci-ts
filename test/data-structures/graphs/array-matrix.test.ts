@@ -1,6 +1,6 @@
-import { Edge } from '../../src/data-structures/graphs/graph.interface';
-import { MatrixGraph } from '../../src/data-structures/graphs/matrix-graph';
-import { sortByString } from '../../src/util/sort-by-string';
+import { Edge } from '../../../src/data-structures/graphs/graph.interface';
+import { MatrixGraph } from '../../../src/data-structures/graphs/matrix-graph';
+import { sortByString } from '../../../src/util/sort-by-string';
 
 type LabeledEdge<V> = Edge<V> & {label: string};
 const a = Symbol("a"), b = Symbol("b"), c = Symbol("c");
