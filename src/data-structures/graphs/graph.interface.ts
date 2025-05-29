@@ -52,4 +52,6 @@ export interface EdgeMutableGraph<V, E extends Edge<V>> extends Graph<V, E> {
 export interface VertexMutableGraph<V, E extends Edge<V>> extends EdgeMutableGraph<V, E> {
     addVertex(v: V): boolean;
     removeVertex(v: V): boolean;
+
+    mutableCopy(): VertexMutableGraph<V, E>;
 }
