@@ -1,4 +1,5 @@
 import { NoSuchElementError } from "../../errors/no-such-element.error";
+import { EqualityType, map } from "../../util/equality-type";
 import { Tensor } from "../arrays/tensor";
 import { Edge, EdgeMutableGraph } from "./graph.interface";
 
@@ -16,15 +17,20 @@ export class MatrixGraph<V, E extends Edge<V>> implements EdgeMutableGraph<V, E>
     private readonly inDegrees: number[];
     private readonly outDegrees: number[];
     private readonly index: ReadonlyMap<V, number>;
+    public readonly nodeEqualityType: EqualityType;
 
     
-    constructor(nodes: readonly V[]) {
-        const map: Map<V, number> = new Map();
+    constructor(
+        nodes: readonly V[] = [], 
+        {nodeEqualityType}: {nodeEqualityType: EqualityType} = {nodeEqualityType: "structural"}
+    ) {
+        this.nodeEqualityType = nodeEqualityType;
+        const index: Map<V, number> = map(nodeEqualityType);
         this.vertices = nodes.map((v, i) => {
-            map.set(v, i);
+            index.set(v, i);
             return v;
         });
-        this.index = map;
+        this.index = index;
         this.nodeCount = this.vertices.length;
         this.inDegrees = Array(this.nodeCount).fill(0);
         this.outDegrees = Array(this.nodeCount).fill(0);
@@ -37,11 +43,14 @@ export class MatrixGraph<V, E extends Edge<V>> implements EdgeMutableGraph<V, E>
         return this._edgeCount;
     }
 
-    removeEdge(from: V, to: V): E {
+    removeEdge(from: V, to: V): E | undefined {
         this.assertNodeExists(from);
         this.assertNodeExists(to);
 
-        const ret = this.getEdge(from, to);
+        const ret = this.getEdgeIfExists(from, to);
+        if(ret == undefined) {
+            return undefined;
+        }
         this._edgeCount--;
         this.tensor.set(this.coordsFor(ret), undefined);
         return ret;
@@ -142,7 +151,7 @@ export class MatrixGraph<V, E extends Edge<V>> implements EdgeMutableGraph<V, E>
     }
 
     mutableCopy(): EdgeMutableGraph<V, E> {
-        const g: MatrixGraph<V, E> = new MatrixGraph(this.vertices);
+        const g: MatrixGraph<V, E> = new MatrixGraph(this.vertices, {nodeEqualityType: this.nodeEqualityType});
         for(const e of this.edges()) {
             g.setEdge(e);
         }
@@ -151,10 +160,8 @@ export class MatrixGraph<V, E extends Edge<V>> implements EdgeMutableGraph<V, E>
 
     
     private assertNodeExists(v: V) {
-        const nodes = [...this.nodes()];
-
-        if(0 > nodes.findIndex(u => u == v)) {
-            throw new NoSuchElementError(JSON.stringify({v: JSON.stringify(v), nodes}));
+        if(!this.index.has(v)) {
+            throw new NoSuchElementError("Graph has no such node " + v);
         }
     }
 }

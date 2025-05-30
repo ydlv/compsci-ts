@@ -1,3 +1,4 @@
+import { EqualityType } from "../../util/equality-type";
 
 
 export type Edge<V, TSateliteData = {}> = {
@@ -11,6 +12,7 @@ export interface Graph<V, E extends Edge<V> = Edge<V>> {
 
     readonly nodeCount: number;
     readonly edgeCount: number;
+    readonly nodeEqualityType: EqualityType;
     
     hasNode(v: V): boolean;
     hasEdge(from: V, to: V): boolean;
@@ -45,7 +47,7 @@ export interface Graph<V, E extends Edge<V> = Edge<V>> {
 }
 
 export interface EdgeMutableGraph<V, E extends Edge<V> = Edge<V>> extends Graph<V, E> {
-    removeEdge(from: V, to: V): E;
+    removeEdge(from: V, to: V): E | undefined;
     setEdge(e: E): void;
 }
 

@@ -1,7 +1,7 @@
 import { NoSuchElementError } from "../../errors/no-such-element.error";
-import { DeepMutable } from "../../types/util.types";
 import { removeElement, removeWhere } from "../../util/array-utils";
 import { upsert } from "../../util/crud/upsert";
+import { EqualityType, map, set } from "../../util/equality-type";
 import { iterable } from "../../util/iterables";
 import { updateMap } from "../../util/map-utils";
 import { edgeMatcher } from "./edge-matches";
@@ -14,14 +14,19 @@ export class AdjacencyListMatrix<V, E extends Edge<V> = Edge<V>> implements Vert
     private readonly _outDegree: Map<V, number>;
     private readonly _inDegree: Map<V, number>;
     private readonly _vertices: Set<V>;
+    public readonly nodeEqualityType: EqualityType;
     private _edgeCount = 0;
         
-    constructor(initialVertices: V[] = []) {
-        this._outDegree = new Map();
-        this._inDegree = new Map();
-        this.incoming = new Map();
-        this.outgoing = new Map();
-        this._vertices = new Set();
+    constructor(
+        initialVertices: V[] = [], 
+        {nodeEqualityType}: {nodeEqualityType: EqualityType} = {nodeEqualityType: "structural"}
+    ) {
+        this.nodeEqualityType = nodeEqualityType;
+        this._outDegree = map(nodeEqualityType);
+        this._inDegree = map(nodeEqualityType);
+        this.incoming = map(nodeEqualityType);
+        this.outgoing = map(nodeEqualityType);
+        this._vertices = set(nodeEqualityType);
         initialVertices.forEach(v => this.addVertex(v));
     }
 
@@ -55,11 +60,11 @@ export class AdjacencyListMatrix<V, E extends Edge<V> = Edge<V>> implements Vert
         return true;
     }
 
-    removeEdge(from: V, to: V): E {
+    removeEdge(from: V, to: V): E | undefined {
         this.nodeMustExist(from);
         this.nodeMustExist(to);
         if(!this.hasEdge(from, to)) {
-            throw new NoSuchElementError(`Graph has no edge ${from} -> ${to}`);
+            return undefined;
         }
         const e = this.outgoing.get(from)!.find(e => e.from == from)!;
 
