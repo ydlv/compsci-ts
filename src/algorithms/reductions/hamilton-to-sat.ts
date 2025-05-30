@@ -1,14 +1,14 @@
 import { and, atMostOne, exactlyOne, ExactlyOneFormula, Formula, Solution, variableBits } from "logic-solver";
 import { Graph } from "../../data-structures/graphs/graph.interface";
 import { AbstractReduction } from "./reduction";
-import { DeepIdHelper, IdHelper } from "../../util/id-helper";
+import { IdHelper } from "../../util/id-helper";
 import { product } from "../../util/iteration-utils";
 import { range } from "../../util/range";
 import { DeepMap } from "deep-equality-data-structures";
 
 export class HamiltonToSat<V> extends AbstractReduction<Graph<V>, ReadonlyArray<V>, Formula, Solution>  {
 
-    private readonly id: IdHelper<[V, number]> = new DeepIdHelper(String, "SATVar");
+    private readonly id: IdHelper<[V, number]> = new IdHelper(String, { prefix: "SATVar", equalityType: "structural" });
 
     public constructor() {
        super();
