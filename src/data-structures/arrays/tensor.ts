@@ -78,6 +78,9 @@ export class Tensor<T, N extends NaturalNumber> implements MutableMultidemsional
     }
 
     private fromCoords(coords: Coordinates<N>): number {
+        if(coords.some(x => typeof(x) !== "number" || !(x >= 0) || (x != Math.round(x)))) {
+            throw new IllegalOperationError("coords must be all non-negative whole numbers, but was " + JSON.stringify(coords));
+        }
         let n = 0;
         let multiplier = 1;
 

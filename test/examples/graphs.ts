@@ -27,3 +27,24 @@ export function example0() {
     
     return g;
 }
+
+export function weighedDAGExample() {
+    const edges: string[] = [
+        "SA16", "SD3",
+        "AB7",
+        
+        "CB5",
+        "DA10", "DB7", "DC-2" 
+    ];
+    const g: EdgeMutableGraph<V, E> = 
+        new MatrixGraph<V, E>(["A", "B", "C", "D", "S"]);
+
+    for(const s of edges) {
+        const u = s.charAt(0) as UppercaseLetter;
+        const v = s.charAt(1) as UppercaseLetter;
+        const w = +(s.substring(2));
+        g.setEdge({from: u, to: v, weight: w});
+    }
+    
+    return g;
+}

@@ -94,6 +94,8 @@
   },
   "dependencies": {
     "@types/lodash": "^4.17.17",
-    "lodash": "^4.17.21"
+    "deep-equality-data-structures": "^2.0.0",
+    "lodash": "^4.17.21",
+    "logic-solver": "^2.0.1"
   }
 }

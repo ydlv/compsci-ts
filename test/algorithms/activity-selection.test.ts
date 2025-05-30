@@ -1,4 +1,4 @@
-import { Activity, activitySelection } from '../../../../src/algorithms/activity-selection';
+import { Activity, activitySelection } from '../../src/algorithms/activity-selection';
 
 // example from https://www.geeksforgeeks.org/activity-selection-problem-greedy-algo-1/ 
 const activities: Activity[] = [

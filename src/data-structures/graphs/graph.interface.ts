@@ -44,12 +44,12 @@ export interface Graph<V, E extends Edge<V> = Edge<V>> {
     mutableCopy(): EdgeMutableGraph<V, E>;
 }
 
-export interface EdgeMutableGraph<V, E extends Edge<V>> extends Graph<V, E> {
+export interface EdgeMutableGraph<V, E extends Edge<V> = Edge<V>> extends Graph<V, E> {
     removeEdge(from: V, to: V): E;
     setEdge(e: E): void;
 }
 
-export interface VertexMutableGraph<V, E extends Edge<V>> extends EdgeMutableGraph<V, E> {
+export interface VertexMutableGraph<V, E extends Edge<V> = Edge<V>> extends EdgeMutableGraph<V, E> {
     addVertex(v: V): boolean;
     removeVertex(v: V): boolean;
 

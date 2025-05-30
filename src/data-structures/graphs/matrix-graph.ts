@@ -151,8 +151,10 @@ export class MatrixGraph<V, E extends Edge<V>> implements EdgeMutableGraph<V, E>
 
     
     private assertNodeExists(v: V) {
-        if(!this.index.has(v)) {
-            throw new NoSuchElementError("Graph has no such node: " + v);
+        const nodes = [...this.nodes()];
+
+        if(0 > nodes.findIndex(u => u == v)) {
+            throw new NoSuchElementError(JSON.stringify({v: JSON.stringify(v), nodes}));
         }
     }
 }
