@@ -9,7 +9,7 @@ import { Edge, EdgeMutableGraph } from "./graph.interface";
  * It is implemented via a matrix.
  * If you need adding vertices, you'll need the list based implementation. 
  */
-export class MatrixGraph<V, E extends Edge<V>> implements EdgeMutableGraph<V, E> {
+export class MatrixGraph<V, E extends Edge<V> = Edge<V>> implements EdgeMutableGraph<V, E> {
     readonly tensor: Tensor<E | undefined, 2>;
     readonly vertices: readonly V[];
     readonly nodeCount: number;
