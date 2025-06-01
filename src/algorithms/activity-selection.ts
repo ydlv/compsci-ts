@@ -8,7 +8,7 @@ export type Activity = {
 }
 
 export function overlaps(a1: Activity, a2: Activity): boolean {
-    return isBetween(a1.start, [a2.start, a2.end]) || isBetween(a2.start, [a1.start, a1.end]);
+    return a1.end > a2.start && a2.end > a1.start;
 }
 
 export function activitySelection(activities: Activity[]): Activity[] {
