@@ -30,7 +30,6 @@ describe("weighedActivitySelection", () => {
             name: "A"+i,
             weight: i + 1
         }));
-        console.log("5 non-overlap: " + JSON.stringify(activities));
 
         const [set, weight] = weighedActivitySelection(activities);
         expect(set.size).toEqual(5);
