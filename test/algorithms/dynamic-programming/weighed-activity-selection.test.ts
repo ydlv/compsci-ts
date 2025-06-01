@@ -1,5 +1,5 @@
-import { map, range, some } from "lodash";
-import { weighedActivitySelection, WeighedActivity } from "../../algorithms/dynamic-programming/weighed-activity-selection";
+import { map, range } from "lodash";
+import { weighedActivitySelection, WeighedActivity } from "../../../src/algorithms/dynamic-programming/weighed-activity-selection";
 
 describe("weighedActivitySelection", () => {
     it("works for end case empty set", () => {
