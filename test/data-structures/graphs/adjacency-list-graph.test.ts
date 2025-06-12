@@ -1,8 +1,8 @@
-import { Edge } from '../../../src/data-structures/graphs/graph.interface';
+import { describe, expect, test } from "bun:test";
 import { AdjacencyListMatrix } from '../../../src/data-structures/graphs/adjacency-list-graph';
+import { Edge } from '../../../src/data-structures/graphs/graph.interface';
+import { list } from '../../../src/util/iterables';
 import { sortByString } from '../../../src/util/sort-by-string';
-import { LowercaseLetter } from '../../examples/types';
-import { expect, test, describe } from "bun:test";
 
 type LabeledEdge<V> = Edge<V> & {label: string};
 const a = Symbol("a"), b = Symbol("b"), c = Symbol("c");
@@ -44,7 +44,7 @@ describe('AdjacencyListMatrix', () => {
 
  test('has correct iterator for nodes', () => {
         const g = new AdjacencyListMatrix([a, b, c]);
-        const asList = [...(g.nodes())];
+        const asList = list(g.nodes());
         expect(asList).toHaveLength(3);
         sortByString(asList, x => x.toString());
         expect(asList[0]).toBe(a);
@@ -58,7 +58,7 @@ describe('AdjacencyListMatrix', () => {
             bc: LabeledEdge<symbol> = {from: b, to: c, label: "bc"};
         g.setEdge(bc);
         g.setEdge(ab);
-        const edges = [...(g.edges())];
+        const edges = list(g.edges());
         sortByString(edges, e => e.label.toString());
         expect(edges[0]).toBe(ab);
         expect(edges[1]).toBe(bc);

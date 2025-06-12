@@ -1,3 +1,4 @@
+import { range } from "lodash";
 import { MutableMatrix } from "./matrix.interface";
 
 export class ArrayMatrix<R extends number, C extends number> implements MutableMatrix<R, C> {
@@ -12,7 +13,7 @@ export class ArrayMatrix<R extends number, C extends number> implements MutableM
     ) {
         this.shape = [rows, columns];
         this.size = rows * columns;
-        this.array = Array(rows).fill(true).map(() => Array(columns).fill(0));
+        this.array = range(rows).map(() => Array(columns).fill(0));
     }
 
     map(mapper: (value: number, row: number, column: number) => number): MutableMatrix<R, C> {

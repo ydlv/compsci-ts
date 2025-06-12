@@ -1,16 +1,17 @@
+import { minBy } from "lodash";
 import { Edge, Graph } from "../../../data-structures/graphs/graph.interface";
 import { IllegalOperationError } from "../../../errors/illegal-operation.error";
 import { removeElement } from "../../../util/crud/remove";
-import { LightestPathAlgorithm, LightestPathTree } from "./lightest-paths-tree.interface";
+import { list } from "../../../util/iterables";
+import { LightestPathTree } from "./lightest-paths-tree.interface";
 import { RelaxationTree } from "./relaxation-tree";
-import {minBy} from "lodash";
 
 export function dijkstra<V, E extends Edge<V> = Edge<V>>(g: Graph<V, E>, ego: V, weight: (e: E) => number): LightestPathTree<V> {
-    const tree = new RelaxationTree([...(g.nodes())], ego);
-    const Q = [...(g.nodes())];
+    const tree = new RelaxationTree(list(g.nodes()), ego);
+    const Q = list(g.nodes());
 
     while(Q.length > 0) {
-        const u = minBy(Q, v => tree.distance(v));
+        const u = minBy(Q, v => tree.distance(v))!;
         removeElement(Q, u);
         for(const e of g.outgoingEdges(u)) {
             const w = weight(e);

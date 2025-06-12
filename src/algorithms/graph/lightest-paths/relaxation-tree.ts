@@ -1,7 +1,5 @@
-import { ArrayMatrix } from "../../../data-structures/arrays/array-matrix";
-import { MutableMatrix } from "../../../data-structures/arrays/matrix.interface";
-import { Edge } from "../../../data-structures/graphs/graph.interface";
 import { NoSuchElementError } from "../../../errors/no-such-element.error";
+import { query } from "../../../util/query";
 import { LightestPathTree } from "./lightest-paths-tree.interface";
 
 export type WeighedEdge<V> = Edge<V> & {weight: number};
@@ -16,11 +14,10 @@ export class RelaxationTree<V> {
         this.nodeCount = vertices.length;
         this._distance = new Map();
         this._parent = new Map();
-        this.vertices = vertices.map((v) => {
+        this.vertices = query(vertices).tap((v) => {
             this._distance.set(v, Infinity);
             this._parent.set(v, v);
-            return v;
-        });
+        }).toArray();
         this._distance.set(ego, 0);
     }
     

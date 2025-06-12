@@ -12,8 +12,14 @@ interface WeighedActivitySelection {
     totalWeight: number;
 }
 
-function addOne(subset: WeighedActivitySelection, activity: WeighedActivity): WeighedActivitySelection {
+function addOne(subset: WeighedActivitySelection, activity?: WeighedActivity): WeighedActivitySelection {
     const newSet = new DeepSet([...subset.selection.values()]);
+    if(activity === undefined) {
+        return {
+            selection: newSet,
+            totalWeight: subset.totalWeight
+        };
+    }
     newSet.add(activity);
     return {
         selection: newSet,

@@ -1,6 +1,7 @@
+import { describe, expect, test } from "bun:test";
 import { map, range } from "lodash";
-import { weighedActivitySelection, WeighedActivity } from "../../../src/algorithms/dynamic-programming/weighed-activity-selection";
-import { expect, test, describe } from "bun:test";
+import { WeighedActivity, weighedActivitySelection } from "../../../src/algorithms/dynamic-programming/weighed-activity-selection";
+import { list } from "../../../src/util/iterables";
 
 describe("weighedActivitySelection", () => {
     test("works for end case empty set", () => {
@@ -51,7 +52,7 @@ describe("weighedActivitySelection", () => {
         const [set, weight] = weighedActivitySelection(activities);
         expect(weight).toBe(5 + 6);
         expect(set.size).toBe(2);
-        const selection = [...(set.values())].map(x => x.name).sort();
+        const selection = list(set.values()).map(x => x.name).sort();
         expect(selection).toEqual(["A2", "A4"]);
     });
 });

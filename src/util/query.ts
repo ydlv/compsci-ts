@@ -4,6 +4,7 @@ import { IllegalOperationError } from "../errors/illegal-operation.error";
 import { NoSuchElementError } from "../errors/no-such-element.error";
 import { Predicate, UnaryOperator } from "../types/functional.types";
 import { EqualityType, set } from "./equality-type";
+import { list } from "./iterables";
 import { tap } from "./tap";
 
 export class Query<T> implements Iterable<T> {
@@ -22,7 +23,7 @@ export class Query<T> implements Iterable<T> {
     }
 
     toArray(): T[] {
-        return [...(this.toIterable())];
+        return list(this.toIterable());
     }
 
     toSet(equalityType: EqualityType = "structural") {
@@ -215,7 +216,7 @@ export class Query<T> implements Iterable<T> {
     }
 }
 
-export function query<T>(source: Iterable<T> | (() => Iterable<T>)) {
+export function query<T>(source: Iterable<T> | (() => Iterable<T>)): Query<T> {
     // @ts-ignore
     return new Query(source);
 }

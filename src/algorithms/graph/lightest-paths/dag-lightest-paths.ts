@@ -1,6 +1,7 @@
 import { Edge, Graph } from "../../../data-structures/graphs/graph.interface";
 import { bfs } from "../../../data-structures/graphs/traversals";
 import { UnaryOperator } from "../../../types/functional.types";
+import { list } from "../../../util/iterables";
 import { LightestPathTree } from "./lightest-paths-tree.interface";
 import { RelaxationTree } from "./relaxation-tree";
 
@@ -10,7 +11,7 @@ import { RelaxationTree } from "./relaxation-tree";
  */
 export function DAGLightestPathsTree<V, E extends Edge<V>>(g: Graph<V, E>, ego: V, weight: UnaryOperator<E, number>)
 : LightestPathTree<V> {
-    const tree = new RelaxationTree([...(g.nodes())], ego);
+    const tree = new RelaxationTree(list(g.nodes()), ego);
     for(const src of bfs(g, ego)) {
         for(const e of g.outgoingEdges(src)) {
             tree.relaxIfPossible({...e, weight: weight(e)});

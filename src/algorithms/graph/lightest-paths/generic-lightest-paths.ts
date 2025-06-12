@@ -1,5 +1,6 @@
 import { Edge, Graph } from "../../../data-structures/graphs/graph.interface";
 import { UnaryOperator } from "../../../types/functional.types";
+import { list } from "../../../util/iterables";
 import { LightestPathTree } from "./lightest-paths-tree.interface";
 import { RelaxationTree } from "./relaxation-tree";
 
@@ -9,7 +10,7 @@ import { RelaxationTree } from "./relaxation-tree";
 export function genericLightestPath<V, E extends Edge<V>>(
     g: Graph<V, E>, ego: V, weight: UnaryOperator<E, number>
 ): LightestPathTree<V> {
-    const tree = new RelaxationTree<V>([...(g.nodes())], ego);
+    const tree = new RelaxationTree<V>(list(g.nodes()), ego);
 
     let anyRelaxed: boolean = true;
     while(anyRelaxed) {
