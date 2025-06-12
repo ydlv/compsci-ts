@@ -1,5 +1,5 @@
-import { Activity, activitySelection } from '../../src/algorithms/activity-selection';
-import { expect, test, describe, beforeAll } from "bun:test";
+import { describe, expect, test } from "bun:test";
+import { Activity, activitySelection } from '../../../src/algorithms/greedy/activity-selection';
 
 // example from https://www.geeksforgeeks.org/activity-selection-problem-greedy-algo-1/ 
 const activities: Activity[] = [
