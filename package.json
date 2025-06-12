@@ -1,46 +1,8 @@
 {
-  "name": "compsci-ts",
-  "private": true,
-  "version": "0.0.0",
-  "description": "",
-  "keywords": [],
-  "main": "dist/compsci-ts.umd.js",
-  "module": "dist/compsci-ts.es5.js",
-  "typings": "dist/types/compsci-ts.d.ts",
-  "files": [
-    "dist"
-  ],
   "author": "Yuval Dolev <ydlv.dev@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
-  "license": "MIT",
-  "engines": {
-    "node": ">=6.0.0"
-  },
-  "scripts": {
-    "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
-    "prebuild": "rimraf dist",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
-    "start": "rollup -c rollup.config.ts -w",
-    "test": "jest",
-    "test:clear": "jest --clearCache",
-    "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch",
-    "test:prod": "npm run lint && npm run test -- --no-cache",
-    "deploy-docs": "ts-node tools/gh-pages-publish",
-    "report-coverage": "cat ./coverage/lcov.info | coveralls",
-    "commit": "git-cz",
-    "semantic-release": "semantic-release",
-    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
-    "precommit": "lint-staged",
-    "travis-deploy-once": "travis-deploy-once"
-  },
-  "lint-staged": {
-    "{src,test}/**/*.ts": [
-      "prettier --write",
-      "git add"
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
     ]
   },
   "config": {
@@ -48,54 +10,67 @@
       "path": "node_modules/cz-conventional-changelog"
     }
   },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "logic-solver": "^2.0.1",
+    "numjs": "^0.16.1"
+  },
+  "description": "",
+  "devDependencies": {
+    "@commitlint/cli": "^7.6.1",
+    "@commitlint/config-conventional": "^7.6.0",
+    "@types/bun": "^1.2.16",
+    "@types/lodash": "^4.17.17",
+    "@types/node": "^10.17.60",
+    "@types/numjs": "^0.16.8",
+    "colors": "^1.4.0",
+    "commitizen": "^3.1.2",
+    "cross-env": "^5.2.1",
+    "deep-equality-data-structures": "^2.0.0",
+    "husky": "^1.3.1",
+    "lint-staged": "^8.2.1",
+    "prettier": "^1.19.1",
+    "rimraf": "^2.7.1",
+    "semantic-release": "^15.14.0",
+    "shelljs": "^0.8.5",
+    "travis-deploy-once": "^5.0.11",
+    "typedoc": "^0.12.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [],
+  "license": "MIT",
+  "lint-staged": {
+    "{src,test}/**/*.ts": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "main": "dist/compsci-ts.umd.js",
+  "module": "dist/compsci-ts.es5.js",
+  "name": "compsci-ts",
   "prettier": {
     "semi": false,
     "singleQuote": true
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": ""
   },
-  "devDependencies": {
-    "@commitlint/cli": "^7.6.1",
-    "@commitlint/config-conventional": "^7.6.0",
-    "@types/expect": "^24.3.2",
-    "@types/jest": "^23.3.14",
-    "@types/node": "^10.17.60",
-    "colors": "^1.4.0",
-    "commitizen": "^3.1.2",
-    "coveralls": "^3.1.1",
-    "cross-env": "^5.2.1",
-    "husky": "^1.3.1",
-    "jest": "^23.6.0",
-    "jest-config": "^23.6.0",
-    "lint-staged": "^8.2.1",
-    "prettier": "^1.19.1",
-    "prompt": "^1.3.0",
-    "rimraf": "^2.7.1",
-    "rollup": "^0.67.4",
-    "rollup-plugin-commonjs": "^9.3.4",
-    "rollup-plugin-json": "^3.1.0",
-    "rollup-plugin-node-resolve": "^3.4.0",
-    "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-typescript2": "^0.18.1",
-    "semantic-release": "^15.14.0",
-    "shelljs": "^0.8.5",
-    "travis-deploy-once": "^5.0.11",
-    "ts-jest": "^23.10.5",
-    "ts-node": "^7.0.1",
-    "tsconfig-paths": "^4.2.0",
-    "tslint": "^5.20.1",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-config-standard": "^8.0.1",
-    "typedoc": "^0.12.0",
-    "typescript": "^3.9.10"
+  "scripts": {
+    "commit": "git-cz",
+    "prebuild": "rimraf dist",
+    "precommit": "lint-staged",
+    "travis-deploy-once": "travis-deploy-once"
   },
-  "dependencies": {
-    "@types/lodash": "^4.17.17",
-    "deep-equality-data-structures": "^2.0.0",
-    "lodash": "^4.17.21",
-    "logic-solver": "^2.0.1"
-  }
+  "trustedDependencies": [
+    "husky"
+  ],
+  "typings": "dist/types/compsci-ts.d.ts",
+  "version": "0.0.0"
 }

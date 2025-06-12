@@ -1,18 +1,14 @@
+import { describe, expect, test } from "bun:test";
 import { random, remove, shuffle } from 'lodash';
 import { HamiltonToSat } from '../../../src/algorithms/reductions/hamilton-to-sat';
-import { createReduction } from '../../../src/algorithms/reductions/reduction';
-import { EdgeMutableGraph, Graph } from '../../../src/data-structures/graphs/graph.interface';
 import { addBidirectional } from '../../../src/data-structures/graphs/graph-utils';
+import { EdgeMutableGraph } from '../../../src/data-structures/graphs/graph.interface';
 import { MatrixGraph } from '../../../src/data-structures/graphs/matrix-graph';
 import { range } from '../../../src/util/range';
 import { solve } from '../../../src/util/sat-utils';
-import { tap } from '../../../src/util/tap';
-import { UnaryOperator } from '../../../src/types/functional.types';
-import { product } from '../../../src/util/iteration-utils';
-import { set } from '../../../src/util/equality-type';
 
 describe("Hamilton to SAT reduction", () => {
-    it("Finds a correct solution for a Dirac graph", () => {
+ test("Finds a correct solution for a Dirac graph", () => {
         const N = 20;
         const g: EdgeMutableGraph<number> = new MatrixGraph(range(N));
         
@@ -20,7 +16,7 @@ describe("Hamilton to SAT reduction", () => {
         for(const v of range(N)) {
             const rank = random(Math.ceil(N / 2), N - 1, false);
             const neighbors = range(N);
-            remove(neighbors, u => u == v);
+            remove(neighbors, u => u === v);
             shuffle(neighbors);
             for(const u of range(rank)) {
                 g.setEdge({from: v, to: u});
@@ -42,7 +38,7 @@ describe("Hamilton to SAT reduction", () => {
         }
     });
 
-    it("returns empty for graph without Hamiltonian path", () => {
+ test("returns empty for graph without Hamiltonian path", () => {
          const N = 20;
         const g: EdgeMutableGraph<number | string> = new MatrixGraph([...range(N), "A", "B", "C"]);
         
@@ -50,7 +46,7 @@ describe("Hamilton to SAT reduction", () => {
         for(const v of range(N)) {
             const rank = random(Math.ceil(N / 2), N - 1, false);
             const neighbors = range(N);
-            remove(neighbors, u => u == v);
+            remove(neighbors, u => u === v);
             shuffle(neighbors);
             for(const u of range(rank)) {
                 addBidirectional(g, v, u);

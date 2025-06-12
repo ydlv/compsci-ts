@@ -1,20 +1,21 @@
 import { Edge } from '../../../src/data-structures/graphs/graph.interface';
 import { MatrixGraph } from '../../../src/data-structures/graphs/matrix-graph';
 import { sortByString } from '../../../src/util/sort-by-string';
+import { expect, test, describe } from "bun:test";
 
 type LabeledEdge<V> = Edge<V> & {label: string};
 const a = Symbol("a"), b = Symbol("b"), c = Symbol("c");
 
 describe('ArrayMatrix', () => {
-    it('can be constructed', ()  => {
+ test('can be constructed', ()  => {
         expect(() => new MatrixGraph([1, 2, 3])).not.toThrow();
     });
 
-    it('has correct node count', () => {
+ test('has correct node count', () => {
         expect(new MatrixGraph([1, 2, 3]).nodeCount).toBe(3);
     });
 
-    it('has correct edge count', () => {
+ test('has correct edge count', () => {
         const g = new MatrixGraph([1, 2, 3]);
         expect(g.edgeCount).toBe(0);
 
@@ -33,7 +34,7 @@ describe('ArrayMatrix', () => {
         expect(g.edgeCount).toBe(1);
     });
 
-    it('has correct iterator for nodes', () => {
+ test('has correct iterator for nodes', () => {
         const g = new MatrixGraph([a, b, c]);
         const asList = [...(g.nodes())];
         expect(asList).toHaveLength(3);
@@ -43,7 +44,7 @@ describe('ArrayMatrix', () => {
         expect(asList[2]).toBe(c);
     });
 
-    it('has correct iterator for edges', () => {
+ test('has correct iterator for edges', () => {
         const g: MatrixGraph<symbol, LabeledEdge<symbol>> = new MatrixGraph([a, b, c]);
         const ab: LabeledEdge<symbol> = {from: a, to: b, label: "ab"},
             bc: LabeledEdge<symbol> = {from: b, to: c, label: "bc"};

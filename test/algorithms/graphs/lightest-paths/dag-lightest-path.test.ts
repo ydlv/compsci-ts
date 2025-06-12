@@ -1,8 +1,9 @@
 import { DAGLightestPathsTree } from '../../../../src/algorithms/graph/lightest-paths/dag-lightest-paths';
 import { weighedDAGExample } from '../../../examples/graphs';
+import { expect, test, describe } from "bun:test";
 
 describe("DAGLightestPathsTree", () => {
-    it("works on a DAG", () => {
+ test("works on a DAG", () => {
         const g = weighedDAGExample();
         const tree = DAGLightestPathsTree(g, "S", w => w.weight);
         expect(tree.get("S")!).toEqual(["S", 0]);

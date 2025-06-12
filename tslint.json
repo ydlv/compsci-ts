@@ -1,6 +1,10 @@
 {
+  "$schema": "https://www.schemastore.org/tslint.json",
   "extends": [
     "tslint-config-standard",
     "tslint-config-prettier"
-  ]
+  ],
+  "rules": {
+    "unified-signatures": false
+  }
 }

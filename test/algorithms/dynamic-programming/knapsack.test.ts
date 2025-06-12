@@ -1,20 +1,21 @@
 import { knapsack, Artifact } from '../../../src/algorithms/dynamic-programming/knapsack';
+import { expect, test, describe } from "bun:test";
 
 describe("knapsack", () => {
-    it("returns ∅ for ∅", () => {
+    test("returns ∅ for ∅", () => {
         const [artifacts, price] = knapsack({artifacts: [], capacity: 5});
         expect(artifacts.length).toBe(0);
         expect(price).toBe(0);
     });
 
-    it("returns {a} for singleton {a} when a can fit in knapsack", () => {
+    test("returns {a} for singleton {a} when a can fit in knapsack", () => {
         const artifacts: Artifact[] = [{price: 10, weight: 5}];
         const [subset, price] = knapsack({artifacts, capacity: 5});
         expect(subset).toEqual([{price: 10, weight: 5}]);
         expect(price).toEqual(10);
     });
 
-    it("returns ∅ if all artifacts outweight knapsack capacity", () => {
+    test("returns ∅ if all artifacts outweight knapsack capacity", () => {
         const [subset, price] = knapsack({ artifacts: [
             { price: 100, weight: 11},
             { price: 200, weight: 12},
@@ -25,7 +26,7 @@ describe("knapsack", () => {
         expect(price).toBe(0);
     });
 
-    it("returns only viable solution if there is only one", () => {
+    test("returns only viable solution if there is only one", () => {
         const [subset, price] = knapsack({ artifacts: [
             { price: 100, weight: 11 },
             { price: 200, weight: 12 },
@@ -36,7 +37,7 @@ describe("knapsack", () => {
         expect(price).toEqual(300);
     });
 
-    it("returns entire set when can fit", () => {
+    test("returns entire set when can fit", () => {
         const [subset, price] = knapsack({ artifacts: [
             { price: 100, weight: 11 },
             { price: 200, weight: 12 },
@@ -47,7 +48,7 @@ describe("knapsack", () => {
         expect(price).toEqual(100 + 200 + 50 + 900);
     });
 
-    it("returns optimal solution for non-trivial instance", () => {
+    test("returns optimal solution for non-trivial instance", () => {
         const [subset, price] = knapsack({
             artifacts: [
                 { weight: 6, price: 80 }, // <- in optimal

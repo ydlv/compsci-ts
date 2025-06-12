@@ -1,4 +1,5 @@
 import { Activity, activitySelection } from '../../src/algorithms/activity-selection';
+import { expect, test, describe, beforeAll } from "bun:test";
 
 // example from https://www.geeksforgeeks.org/activity-selection-problem-greedy-algo-1/ 
 const activities: Activity[] = [
@@ -11,15 +12,16 @@ const activities: Activity[] = [
 ];
 
 describe(activitySelection, () => {
-    it("returns correct selection count", () => {
+
+ test("returns correct selection count", () => {
         expect(activitySelection(activities)).toHaveLength(4);
     });
 
-    it("returns correct selection", () => {
+ test("returns correct selection", () => {
         expect(activitySelection(activities).map(x => x.name)).toEqual(["A", "B", "D", "E"]);
     })
 
-    it("doesn't mutate parameter", () => {
+ test("doesn't mutate parameter", () => {
         const a = [...activities];
         const b = [...a];
         activitySelection(a);
