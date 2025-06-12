@@ -1,4 +1,4 @@
-import { removeWhere } from "../util/array-utils";
+import { removeWhere } from "../util/crud/remove";
 import { isBetween } from "../util/is-between";
 
 export type Activity = {

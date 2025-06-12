@@ -16,7 +16,7 @@ export class IdHelper<T, TId extends string | number = string> implements IdHelp
          {prefix, equalityType}: {prefix?: string, equalityType: EqualityType}) {
         this.id2obj = [sentinel as T];
         this.obj2id = map(equalityType);
-        this.isString = (type === String) as any;
+        this.isString = (type  ===  String) as any;
         this.prefix = prefix;
     }
 
@@ -40,13 +40,13 @@ export class IdHelper<T, TId extends string | number = string> implements IdHelp
 
     fromId(id: TId): T {
         if(this.prefix) {
-            if(typeof(id) === "string" && id.startsWith(this.prefix)) {
+            if(typeof(id)  ===  "string" && id.startsWith(this.prefix)) {
                 id = (id.substring(this.prefix.length)) as TId;
             }
         }
         const i = +id;
         if(i <= 0) {
-            throw "id can't be <= 0 but was " + id; 
+            throw new Error("id can't be <= 0 but was " + id); 
         }
         if(i > this.size) {
             throw new NoSuchElementError("No element with id " +id);

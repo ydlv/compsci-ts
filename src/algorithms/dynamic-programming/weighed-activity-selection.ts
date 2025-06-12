@@ -1,7 +1,7 @@
-import { max, maxBy, range, sortBy, takeWhile } from 'lodash';
-import { Activity, overlaps } from '../activity-selection';
-import { memoize } from '../../util/memoize';
 import { DeepSet } from 'deep-equality-data-structures';
+import { max, range, sortBy, takeWhile } from 'lodash';
+import { memoize } from '../../util/memoize';
+import { Activity } from '../activity-selection';
 
 export interface WeighedActivity extends Activity {
     weight: number;
@@ -13,9 +13,6 @@ interface WeighedActivitySelection {
 }
 
 function addOne(subset: WeighedActivitySelection, activity: WeighedActivity): WeighedActivitySelection {
-    if(activity == undefined) {
-        return subset;
-    }
     const newSet = new DeepSet([...subset.selection.values()]);
     newSet.add(activity);
     return {
@@ -52,12 +49,12 @@ export function weighedActivitySelection(activities: WeighedActivity[]): [DeepSe
             const acitivityJStart = activities[j].start;
             const activitiesThatEndNoLaterThanStartOfJ = takeWhile(range(activities.length), i => activities[i].end <= acitivityJStart);
 
-            if(activitiesThatEndNoLaterThanStartOfJ.length == 0) {
+            if(activitiesThatEndNoLaterThanStartOfJ.length === 0) {
                 return -1;
             }
             
             // must have at least 1 element, becuase j activity starts before j-th activity ends.
-            return max(activitiesThatEndNoLaterThanStartOfJ)!; 
+            return max(activitiesThatEndNoLaterThanStartOfJ); 
         }
     );
 

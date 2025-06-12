@@ -48,7 +48,7 @@ export class MatrixGraph<V, E extends Edge<V> = Edge<V>> implements EdgeMutableG
         this.assertNodeExists(to);
 
         const ret = this.getEdgeIfExists(from, to);
-        if(ret == undefined) {
+        if(ret === undefined) {
             return undefined;
         }
         this._edgeCount--;
@@ -57,7 +57,7 @@ export class MatrixGraph<V, E extends Edge<V> = Edge<V>> implements EdgeMutableG
     }
 
     setEdge(e: E): void {
-        if(this.getEdgeIfExists(e.from, e.to) == undefined) {
+        if(this.getEdgeIfExists(e.from, e.to) === undefined) {
             this._edgeCount++;
         }
         this.tensor.set(this.coordsFor(e), e);
@@ -69,7 +69,7 @@ export class MatrixGraph<V, E extends Edge<V> = Edge<V>> implements EdgeMutableG
 
     *edges(): Iterable<E> {
         for(const e of this.tensor) {
-            if(e != undefined) {
+            if(e !== undefined) {
                 yield e;
             }
         }
@@ -83,7 +83,7 @@ export class MatrixGraph<V, E extends Edge<V> = Edge<V>> implements EdgeMutableG
         this.assertNodeExists(from);
         this.assertNodeExists(to);
 
-       return this.getEdgeIfExists(from, to) != undefined;
+       return this.getEdgeIfExists(from, to) !== undefined;
     }
 
     getEdge(from: V, to: V): E {
@@ -91,7 +91,7 @@ export class MatrixGraph<V, E extends Edge<V> = Edge<V>> implements EdgeMutableG
         this.assertNodeExists(to);
 
         const e = this.getEdgeIfExists(from, to);
-        if(e == undefined) {
+        if(e === undefined) {
             throw new NoSuchElementError("Graph has no edge from " + from + " to " + to);
         }
         return e;
@@ -118,7 +118,7 @@ export class MatrixGraph<V, E extends Edge<V> = Edge<V>> implements EdgeMutableG
         this.assertNodeExists(v);
         const destIndex = this.indexOf(v);
         
-        for(var srcIndex = 0; srcIndex < this.nodeCount; srcIndex++) {
+        for(let srcIndex = 0; srcIndex < this.nodeCount; srcIndex++) {
             const u = this.vertices[srcIndex];
             const e = this.tensor.get(srcIndex, destIndex);
             if(e) {
@@ -127,11 +127,11 @@ export class MatrixGraph<V, E extends Edge<V> = Edge<V>> implements EdgeMutableG
         }
      }
      
-     *outgoingEdges(v: V): Iterable<E> {
+    *outgoingEdges(v: V): Iterable<E> {
         this.assertNodeExists(v);
         const srcIndex = this.indexOf(v);
         
-        for(var destIndex = 0; destIndex < this.nodeCount; destIndex++) {
+        for(let destIndex = 0; destIndex < this.nodeCount; destIndex++) {
             const u = this.vertices[destIndex];
             const e = this.tensor.get(srcIndex, destIndex);
             if(e) {
