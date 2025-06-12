@@ -10,3 +10,7 @@ export function iterable<T>(source: Iterable<T>): Iterable<T> {
         [Symbol.iterator]: () => source[Symbol.iterator]()
     };
 }
+
+export function list<T>(source: Iterable<T>): T[] {
+    return [...source];
+}

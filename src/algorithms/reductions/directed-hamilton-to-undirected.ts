@@ -28,7 +28,7 @@ extends AbstractReduction<Graph<V, E>, readonly V[], Graph<[V, N]>, readonly [V,
     }
     
     convertOutput(y: [V, N][]): readonly V[] {
-        if(y.length % 3 != 0) {
+        if(y.length % 3 !== 0) {
             throw new AssertionError({
                 message: "length of Hamilton path in undirected reduction grpah should be divisible but 3, but was " + y.length,
                 actual: y.length
@@ -36,15 +36,15 @@ extends AbstractReduction<Graph<V, E>, readonly V[], Graph<[V, N]>, readonly [V,
         }
 
         // first, find direction; all will be 1>2>3 or 3>2>1.
-        const firstIndexOfAMiddleVertex = y.findIndex(([_, n]) => n == 2);
+        const firstIndexOfAMiddleVertex = y.findIndex(([_, n]) => n === 2);
         
         // the next one must be either 1 or 3. 
-        if(y[(firstIndexOfAMiddleVertex + 1) % y.length][1] != 3) {
+        if(y[(firstIndexOfAMiddleVertex + 1) % y.length][1] !== 3) {
             y = y.reverse();
         }
         
         // next, we need to find the first 1. 
-        const firstIndexOfA1 = y.findIndex(([_, n]) => n == 1);
+        const firstIndexOfA1 = y.findIndex(([_, n]) => n === 1);
         const ret: V[] = [];
         for(let i = firstIndexOfA1; i < y.length; i += 3) {
             ret.push(y[i][0]);

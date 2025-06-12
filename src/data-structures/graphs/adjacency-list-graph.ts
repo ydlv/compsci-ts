@@ -1,11 +1,11 @@
 import { NoSuchElementError } from "../../errors/no-such-element.error";
-import { removeElement, removeWhere } from "../../util/array-utils";
+import { removeWhere } from "../../util/crud/remove";
 import { upsert } from "../../util/crud/upsert";
 import { EqualityType, map, set } from "../../util/equality-type";
 import { iterable } from "../../util/iterables";
 import { updateMap } from "../../util/map-utils";
 import { edgeMatcher } from "./edge-matches";
-import { Edge, EdgeMutableGraph, VertexMutableGraph } from "./graph.interface";
+import { Edge, VertexMutableGraph } from "./graph.interface";
 
 export class AdjacencyListMatrix<V, E extends Edge<V> = Edge<V>> implements VertexMutableGraph<V, E> {
 
@@ -66,7 +66,7 @@ export class AdjacencyListMatrix<V, E extends Edge<V> = Edge<V>> implements Vert
         if(!this.hasEdge(from, to)) {
             return undefined;
         }
-        const e = this.outgoing.get(from)!.find(e => e.from == from)!;
+        const e = this.outgoing.get(from)!.find(e => e.from === from)!;
 
         removeWhere(this.outgoing.get(from)!, edgeMatcher({from, to}));
         removeWhere(this.incoming.get(to)!, edgeMatcher({from, to}));
@@ -93,13 +93,13 @@ export class AdjacencyListMatrix<V, E extends Edge<V> = Edge<V>> implements Vert
         }
         
         upsert(this.incoming.get(e.to)!, {
-            find: e_ => e_.from == e.from,
+            find: ee => ee.from === e.from,
             insert: () => e,
             update: () => e
         });
 
         upsert(this.outgoing.get(e.from)!, {
-            find: e_ => e_.to == e.to,
+            find: ee => ee.to === e.to,
             insert: () => e,
             update: () => e
         });

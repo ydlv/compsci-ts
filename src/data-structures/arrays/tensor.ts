@@ -70,7 +70,7 @@ export class Tensor<T, N extends NaturalNumber> implements MutableMultidemsional
 
     private toCoords(n: number): Coordinates<N> {
         const ret: number[] = Array(this.order).fill(0);
-        for(var i = 0; i < n; i++) {
+        for(let i = 0; i < n; i++) {
             ret[i] = n % this.shape[i];
             n /= this.shape[i];
         }
@@ -78,7 +78,7 @@ export class Tensor<T, N extends NaturalNumber> implements MutableMultidemsional
     }
 
     private fromCoords(coords: Coordinates<N>): number {
-        if(coords.some(x => typeof(x) !== "number" || !(x >= 0) || (x != Math.round(x)))) {
+        if(coords.some(x => typeof(x) !== "number" || !(x >= 0) || (x !== Math.round(x)))) {
             throw new IllegalOperationError("coords must be all non-negative whole numbers, but was " + JSON.stringify(coords));
         }
         let n = 0;

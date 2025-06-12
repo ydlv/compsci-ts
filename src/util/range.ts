@@ -1,5 +1,6 @@
 export function range(n: number, lazy: {lazy: true}): Iterable<number>
 export function range(n: number, lazy?: {lazy: false}): number[] 
+export function range(n: number, lazy?: {lazy: boolean}): Iterable<number>
 export function range(n: number, lazy?: {lazy: boolean}) {
     if(lazy?.lazy) {
         return lazyRange(n);

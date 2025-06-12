@@ -26,7 +26,7 @@ export class LinkedStack<T> implements Stack<T> {
     }
 
     isEmpty(): boolean {
-        return this.top == undefined;
+        return this.top === undefined;
     }
 
     peek(): T {

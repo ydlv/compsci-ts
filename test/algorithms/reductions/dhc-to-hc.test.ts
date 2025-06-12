@@ -10,6 +10,7 @@ import { tap } from '../../../src/util/tap';
 import { UnaryOperator } from '../../../src/types/functional.types';
 import { product } from '../../../src/util/iteration-utils';
 import { set } from '../../../src/util/equality-type';
+import { expect, test, describe } from "bun:test";
 
 function edges(): [number, number][] {
     return [
@@ -23,7 +24,7 @@ function solveDirectedHamilton<V>(g: Graph<V>): readonly V[] {
 }
 
 describe("Directed Hamilton circuit to Undirected Hamilton circuit reduciton", () => {
-    it("finds a correct solution", () => {
+ test("finds a correct solution", () => {
         const N = 8;
         const G = new MatrixGraph(range(N));
         edges().forEach(([from, to]) => G.setEdge({from, to}));

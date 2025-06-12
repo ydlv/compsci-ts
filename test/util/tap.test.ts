@@ -1,18 +1,19 @@
 import { tap } from '../../src/util/tap';
+import { expect, test, describe } from "bun:test";
 
 describe('tap', () => {
-    it('returns the given object', () => {
+ test('returns the given object', () => {
         const x = Symbol("hello");
         expect(tap(x, () => {})).toBe(x);
     });
 
-    it('performs the callback', () => {
+ test('performs the callback', () => {
         const ref = {done: false};
         tap(0, () => ref.done = true);
         expect(ref.done).toBe(true);
     });
 
-    it('performs the given callback before returning', () => {
+ test('performs the given callback before returning', () => {
         const refA = {value: 0};
         
         const refB = {value: -9};

@@ -2,16 +2,17 @@ import { Edge } from '../../../src/data-structures/graphs/graph.interface';
 import { AdjacencyListMatrix } from '../../../src/data-structures/graphs/adjacency-list-graph';
 import { sortByString } from '../../../src/util/sort-by-string';
 import { LowercaseLetter } from '../../examples/types';
+import { expect, test, describe } from "bun:test";
 
 type LabeledEdge<V> = Edge<V> & {label: string};
 const a = Symbol("a"), b = Symbol("b"), c = Symbol("c");
 
 describe('AdjacencyListMatrix', () => {
-    it('can be constructed', ()  => {
+ test('can be constructed', ()  => {
         expect(() => new AdjacencyListMatrix()).not.toThrow();
     });
 
-    it('has correct node count', () => {
+ test('has correct node count', () => {
         const g = new AdjacencyListMatrix([1, 2, 3]);
         expect(g.nodeCount).toBe(3);
         g.removeVertex(1);
@@ -22,7 +23,7 @@ describe('AdjacencyListMatrix', () => {
         expect(g.nodeCount).toBe(4);
     });
 
-    it('has correct edge count', () => {
+ test('has correct edge count', () => {
         const g = new AdjacencyListMatrix([1, 2, 3]);
         expect(g.edgeCount).toBe(0);
 
@@ -41,7 +42,7 @@ describe('AdjacencyListMatrix', () => {
         expect(g.edgeCount).toBe(1);
     });
 
-    it('has correct iterator for nodes', () => {
+ test('has correct iterator for nodes', () => {
         const g = new AdjacencyListMatrix([a, b, c]);
         const asList = [...(g.nodes())];
         expect(asList).toHaveLength(3);
@@ -51,7 +52,7 @@ describe('AdjacencyListMatrix', () => {
         expect(asList[2]).toBe(c);
     });
 
-    it('has correct iterator for edges', () => {
+ test('has correct iterator for edges', () => {
         const g: AdjacencyListMatrix<symbol, LabeledEdge<symbol>> = new AdjacencyListMatrix([a, b, c]);
         const ab: LabeledEdge<symbol> = {from: a, to: b, label: "ab"},
             bc: LabeledEdge<symbol> = {from: b, to: c, label: "bc"};

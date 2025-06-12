@@ -31,7 +31,7 @@ export class LinkedQueue<T> implements Queue<T> {
     }
 
     isEmpty(): boolean {
-        return this.first == undefined;
+        return this.first === undefined;
     }
 
     top(): T {

@@ -1,40 +1,41 @@
+import { describe, expect, test } from "bun:test";
 import { LinkedQueue } from '../../../src/data-structures/queues/linked-queue';
 import { Queue } from '../../../src/data-structures/queues/queue.interface';
 
 import { NoSuchElementError } from '../../../src/errors/no-such-element.error';
 
 describe('LinkedQueue', () => {
-    it('is empty when initialized', () => {
+ test('is empty when initialized', () => {
         const queue: Queue<string> = new LinkedQueue();
         expect(queue.isEmpty()).toBe(true);
     });
 
-    it('is not empty when an element is queued', () => {
+ test('is not empty when an element is queued', () => {
         const queue: Queue<string> = new LinkedQueue();
         queue.enqueue('a');
         expect(queue.isEmpty()).toBe(false);
     });
 
-    it('has top method return first when has one elements', () => {
+ test('has top method return first when has one elements', () => {
         const queue: Queue<string> = new LinkedQueue();
         queue.enqueue('a');
         expect(queue.top()).toEqual('a');
     });
 
-    it('has dequeuq method return first when has one elements', () => {
+ test('has dequeuq method return first when has one elements', () => {
         const queue: Queue<string> = new LinkedQueue();
         queue.enqueue('a');
         expect(queue.dequeue()).toEqual('a');
     });
 
-    it('has isEmpty return false when more than one', () => {
+ test('has isEmpty return false when more than one', () => {
         const queue: Queue<string> = new LinkedQueue();
         queue.enqueue('a');
         queue.enqueue('b');
         expect(queue.isEmpty()).toBe(false);
     });
 
-    it('has FIFO behavior', () => {
+ test('has FIFO behavior', () => {
         const queue: Queue<'first' | 'second' | 'third'> = new LinkedQueue();
         queue.enqueue('first');
         queue.enqueue('second');
@@ -53,7 +54,7 @@ describe('LinkedQueue', () => {
         expect(queue.isEmpty()).toBe(true);
     });
 
-    it('throws trying to see top when empty', () => {
+ test('throws trying to see top when empty', () => {
         const queue: Queue<number> = new LinkedQueue();
         expect(() => queue.top()).toThrow(NoSuchElementError);
         queue.enqueue(1);
@@ -63,7 +64,7 @@ describe('LinkedQueue', () => {
         expect(() => queue.top()).toThrow(NoSuchElementError);
     });
 
-    it('throws trying to see dequeue when empty', () => {
+ test('throws trying to see dequeue when empty', () => {
         const queue: Queue<number> = new LinkedQueue();
         expect(() => queue.dequeue()).toThrow(NoSuchElementError);
         queue.enqueue(1);
@@ -74,12 +75,12 @@ describe('LinkedQueue', () => {
     });
 
     
-        it('has correct length', () => {
+ test('has correct length', () => {
             const operations: ('+' | '-')[] = "+-++-+-+--".split("")  as ('+' | '-')[];
             var expectedLength = 0;
             const stack: Queue<1> = new LinkedQueue();
             for(const op of operations) {
-                if(op == '+') {
+                if(op === '+') {
                     stack.enqueue(1);
                     expectedLength++;
                 } else {

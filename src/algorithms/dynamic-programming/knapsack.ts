@@ -27,27 +27,26 @@ interface KnapsackProblemSolution {
  * it is not 1.
  */
 export function knapsack({artifacts, capacity}: KnapsackProblem): [Artifact[], number] {
-    const N = artifacts.length;
     
     // subproblem: for j, W, let opt(j, W) be the solution for artifacts[0..<j], W
     const opt: (j: number, W: number) => KnapsackProblemSolution = memoize(
         function(j, W) {
-            if(j == 0) {
+            if(j === 0) {
                 return {
                     artifacts: [], totalPrice: 0
                 };
             }
             
-            const { price: p_j, weight: w_j } = artifacts[j-1];
-            if(w_j > W) {
+            const { price: pJ, weight: wJ } = artifacts[j-1];
+            if(wJ > W) {
                 return opt(j - 1, W);
             }
 
             const dontPick = opt(j - 1, W);
-            const subsolution = opt(j - 1, W - w_j);
+            const subsolution = opt(j - 1, W - wJ);
             const pick: KnapsackProblemSolution = {
                 artifacts: [...(subsolution.artifacts), artifacts[j - 1]],
-                totalPrice: subsolution.totalPrice + p_j
+                totalPrice: subsolution.totalPrice + pJ
             }
 
             if(dontPick.totalPrice > pick.totalPrice) {

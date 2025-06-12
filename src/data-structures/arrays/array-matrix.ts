@@ -58,8 +58,8 @@ export class ArrayMatrix<R extends number, C extends number> implements MutableM
     }
     
     *coordinates(): Iterable<[number, number]> {
-        for(var i = 0; i < this.rows; i++) {
-            for(var j = 0; j < this.columns; j++) {
+        for(let i = 0; i < this.rows; i++) {
+            for(let j = 0; j < this.columns; j++) {
                 yield [i, j];
             }
         }

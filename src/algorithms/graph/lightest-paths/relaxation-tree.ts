@@ -1,9 +1,10 @@
 import { ArrayMatrix } from "../../../data-structures/arrays/array-matrix";
 import { MutableMatrix } from "../../../data-structures/arrays/matrix.interface";
+import { Edge } from "../../../data-structures/graphs/graph.interface";
 import { NoSuchElementError } from "../../../errors/no-such-element.error";
 import { LightestPathTree } from "./lightest-paths-tree.interface";
 
-type WeighedEdge<V> = {from: V, to: V, weight: number};
+export type WeighedEdge<V> = Edge<V> & {weight: number};
 
 export class RelaxationTree<V> {
     private readonly _parent: Map<V, V>;

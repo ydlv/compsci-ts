@@ -1,14 +1,15 @@
 import { map, range } from "lodash";
 import { weighedActivitySelection, WeighedActivity } from "../../../src/algorithms/dynamic-programming/weighed-activity-selection";
+import { expect, test, describe } from "bun:test";
 
 describe("weighedActivitySelection", () => {
-    it("works for end case empty set", () => {
+    test("works for end case empty set", () => {
         const [set, weight] = weighedActivitySelection([]);
         expect(set.size).toEqual(0);
         expect(weight).toEqual(0);
     });
 
-    it("works for case with one activity", () => {
+    test("works for case with one activity", () => {
         const activity: WeighedActivity = {
             name: "A",
             end: 1,
@@ -23,7 +24,7 @@ describe("weighedActivitySelection", () => {
         expect(element.value.name).toEqual("A");
     });
 
-    it("works for case with 5 non-overlapping", () => {
+    test("works for case with 5 non-overlapping", () => {
         const activities: WeighedActivity[] = range(5).map(i => ({
             start: i,
             end: i + 1,
@@ -39,7 +40,7 @@ describe("weighedActivitySelection", () => {
         expect(range(5).every(i => names.includes(`A${i}`)));
     });
 
-    it("works for non-trivial case", () => {
+    test("works for non-trivial case", () => {
         const activities: WeighedActivity[] = [
             {name: "A1", start: 0, end: 7, weight: 2},
             {name: "A2", start: 3, end: 10, weight: 5},
