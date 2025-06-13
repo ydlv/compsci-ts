@@ -3,12 +3,13 @@ import { Edge, Graph } from '../../../data-structures/graphs/graph.interface'
 import { TreesUnionFind } from '../../../data-structures/misc/trees-union-find'
 import { UnaryOperator } from '../../../types/functional.types'
 import { query } from '../../../util/query'
+import { WeighedEdge } from '../lightest-paths/relaxation-tree'
 
 export function kruskalMST<V, E extends Edge<V> = Edge<V>>(
   g: Graph<V, E>,
   weight: UnaryOperator<E, number>
 ): DeepSet<E> {
-  const weighedEdges: readonly (E & { readonly weight: number })[] = query(g.edges())
+  const weighedEdges: readonly WeighedEdge<V>[] = query(g.edges())
     .select(e => ({ ...e, weight: weight(e) }))
     .sortBy(e => e.weight)
     .toArray()

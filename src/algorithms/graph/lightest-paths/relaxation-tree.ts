@@ -1,3 +1,4 @@
+import { Edge } from '../../../data-structures/graphs/graph.interface'
 import { NoSuchElementError } from '../../../errors/no-such-element.error'
 import { query } from '../../../util/query'
 import { LightestPathTree } from './lightest-paths-tree.interface'
@@ -33,12 +34,12 @@ export class RelaxationTree<V> {
     return this._distance.get(v)!
   }
 
-  canRelax({ from, to, weight }: { from: V; to: V; weight: number }) {
+  canRelax({ from, to, weight }: WeighedEdge<V>) {
     // is d[to] > w(from, to) + d[from]
     return this.distance(to) > weight + this.distance(from)
   }
 
-  relax({ from, to, weight }: { from: V; to: V; weight: number }) {
+  relax({ from, to, weight }: WeighedEdge<V>) {
     this._distance.set(to, weight + this.distance(from))
     this._parent.set(to, from)
   }

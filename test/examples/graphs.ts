@@ -1,10 +1,10 @@
-import { EdgeMutableGraph, Edge } from '../../src/data-structures/graphs/graph.interface'
+import { WeighedEdge } from '../../src/algorithms/graph/lightest-paths/relaxation-tree'
+import { EdgeMutableGraph } from '../../src/data-structures/graphs/graph.interface'
 import { MatrixGraph } from '../../src/data-structures/graphs/matrix-graph'
-import { dijkstra } from '../../src/algorithms/graph/lightest-paths/dijkstra'
 import { UppercaseLetter } from './types'
 
 type V = UppercaseLetter
-type E = Edge<V> & { weight: number }
+type E = WeighedEdge<V>
 
 export function example0() {
   const edges: string[] = [
