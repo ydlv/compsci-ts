@@ -1,7 +1,7 @@
 import { DeepSet } from 'deep-equality-data-structures';
 import { max, range, sortBy, takeWhile } from 'lodash';
 import { memoize } from '../../util/memoize';
-import { Activity } from '../activity-selection';
+import { Activity } from '../greedy/activity-selection';
 
 export interface WeighedActivity extends Activity {
     weight: number;
@@ -42,7 +42,7 @@ export function weighedActivitySelection(activities: WeighedActivity[]): [DeepSe
     */
 
     const p: (j: number) => number = memoize(
-        function(j) {
+        function(j: number): number {
 
             if(j <= 0) {
                 return -1;
@@ -60,7 +60,7 @@ export function weighedActivitySelection(activities: WeighedActivity[]): [DeepSe
             }
             
             // must have at least 1 element, becuase j activity starts before j-th activity ends.
-            return max(activitiesThatEndNoLaterThanStartOfJ); 
+            return max(activitiesThatEndNoLaterThanStartOfJ)!; 
         }
     );
 
