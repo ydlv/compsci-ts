@@ -64,6 +64,7 @@
   },
   "scripts": {
     "commit": "git-cz",
+    "format": "prettier \"./{src,test}/**/*.{js,ts}\" --write --config ./.prettierrc",
     "prebuild": "rimraf dist",
     "precommit": "lint-staged",
     "travis-deploy-once": "travis-deploy-once"

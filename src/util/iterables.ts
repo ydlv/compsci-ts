@@ -5,11 +5,11 @@
  * If you need a frozen copy, you need to return a ReadonlyArray<T> from clone
  */
 export function iterable<T>(source: Iterable<T>): Iterable<T> {
-  return {
-    [Symbol.iterator]: () => source[Symbol.iterator]()
-  }
+	return {
+		[Symbol.iterator]: () => source[Symbol.iterator]()
+	};
 }
 
 export function list<T>(source: Iterable<T>): T[] {
-  return [...source]
+	return [...source];
 }

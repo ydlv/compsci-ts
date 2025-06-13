@@ -7,16 +7,16 @@
  * (also the default).
  */
 export interface DynamicOrderedList<T, TRef = T> extends Iterable<T> {
-  compare(left: T, right: T): number
+	compare(left: T, right: T): number;
 
-  insert(element: T): TRef
-  delete(ref: TRef): void
+	insert(element: T): TRef;
+	delete(ref: TRef): void;
 
-  minimum(): TRef | undefined
-  maximum(): TRef | undefined
+	minimum(): TRef | undefined;
+	maximum(): TRef | undefined;
 
-  succesor(ref: TRef): TRef | undefined
-  predecessor(ref: TRef): TRef | undefined
+	succesor(ref: TRef): TRef | undefined;
+	predecessor(ref: TRef): TRef | undefined;
 
-  search(value: T): TRef | undefined
+	search(value: T): TRef | undefined;
 }
