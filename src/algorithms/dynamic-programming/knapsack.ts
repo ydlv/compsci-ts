@@ -1,21 +1,19 @@
-import { memoize } from "../../util/memoize";
-
+import { memoize } from '../../util/memoize'
 
 export interface Artifact {
-    price: number;
-    weight: number;
+  price: number
+  weight: number
 }
 
 export interface KnapsackProblem {
-    artifacts: Artifact[];
-    capacity: number;
+  artifacts: Artifact[]
+  capacity: number
 }
 
 interface KnapsackProblemSolution {
-    artifacts: Artifact[];
-    totalPrice: number;
+  artifacts: Artifact[]
+  totalPrice: number
 }
-
 
 /**
  * Note: this variant of the knapsack problem requires
@@ -26,37 +24,35 @@ interface KnapsackProblemSolution {
  * all weights and the knapsack's capacity by their gcd, if
  * it is not 1.
  */
-export function knapsack({artifacts, capacity}: KnapsackProblem): [Artifact[], number] {
-    
-    // subproblem: for j, W, let opt(j, W) be the solution for artifacts[0..<j], W
-    const opt: (j: number, W: number) => KnapsackProblemSolution = memoize(
-        function(j, W) {
-            if(j === 0) {
-                return {
-                    artifacts: [], totalPrice: 0
-                };
-            }
-            
-            const { price: pJ, weight: wJ } = artifacts[j-1];
-            if(wJ > W) {
-                return opt(j - 1, W);
-            }
+export function knapsack({ artifacts, capacity }: KnapsackProblem): [Artifact[], number] {
+  // subproblem: for j, W, let opt(j, W) be the solution for artifacts[0..<j], W
+  const opt: (j: number, W: number) => KnapsackProblemSolution = memoize(function(j, W) {
+    if (j === 0) {
+      return {
+        artifacts: [],
+        totalPrice: 0
+      }
+    }
 
-            const dontPick = opt(j - 1, W);
-            const subsolution = opt(j - 1, W - wJ);
-            const pick: KnapsackProblemSolution = {
-                artifacts: [...(subsolution.artifacts), artifacts[j - 1]],
-                totalPrice: subsolution.totalPrice + pJ
-            }
+    const { price: pJ, weight: wJ } = artifacts[j - 1]
+    if (wJ > W) {
+      return opt(j - 1, W)
+    }
 
-            if(dontPick.totalPrice > pick.totalPrice) {
-                return dontPick;
-            }
+    const dontPick = opt(j - 1, W)
+    const subsolution = opt(j - 1, W - wJ)
+    const pick: KnapsackProblemSolution = {
+      artifacts: [...subsolution.artifacts, artifacts[j - 1]],
+      totalPrice: subsolution.totalPrice + pJ
+    }
 
-            return pick;
-        }
-    );
+    if (dontPick.totalPrice > pick.totalPrice) {
+      return dontPick
+    }
 
-    const {artifacts: subset, totalPrice} = opt(artifacts.length, capacity);
-    return [subset, totalPrice];
+    return pick
+  })
+
+  const { artifacts: subset, totalPrice } = opt(artifacts.length, capacity)
+  return [subset, totalPrice]
 }

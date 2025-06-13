@@ -1,4 +1,3 @@
-
 /**
  * A list over a data type T which is comparable.
  * With the exception of the search method, all
@@ -8,18 +7,16 @@
  * (also the default).
  */
 export interface DynamicOrderedList<T, TRef = T> extends Iterable<T> {
-    compare(left: T, right: T): number;
-    
-    insert(element: T): TRef;
-    delete(ref: TRef): void;
-    
-    minimum(): TRef | undefined;
-    maximum(): TRef | undefined;
+  compare(left: T, right: T): number
 
-    succesor(ref: TRef): TRef | undefined;
-    predecessor(ref: TRef): TRef | undefined;
+  insert(element: T): TRef
+  delete(ref: TRef): void
 
-    search(value: T): TRef | undefined;
+  minimum(): TRef | undefined
+  maximum(): TRef | undefined
 
+  succesor(ref: TRef): TRef | undefined
+  predecessor(ref: TRef): TRef | undefined
 
+  search(value: T): TRef | undefined
 }
