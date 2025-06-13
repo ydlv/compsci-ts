@@ -1,5 +1,8 @@
 import { describe, expect, test } from "bun:test";
-import { Activity, activitySelection } from "../../../src/algorithms/greedy/activity-selection";
+import {
+	Activity,
+	activitySelection
+} from "../../../src/algorithms/greedy/activity-selection";
 
 // example from https://www.geeksforgeeks.org/activity-selection-problem-greedy-algo-1/
 const activities: Activity[] = [
@@ -17,7 +20,12 @@ describe(activitySelection, () => {
 	});
 
 	test("returns correct selection", () => {
-		expect(activitySelection(activities).map(x => x.name)).toEqual(["A", "B", "D", "E"]);
+		expect(activitySelection(activities).map(x => x.name)).toEqual([
+			"A",
+			"B",
+			"D",
+			"E"
+		]);
 	});
 
 	test("doesn't mutate parameter", () => {

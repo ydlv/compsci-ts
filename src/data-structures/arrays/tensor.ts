@@ -3,7 +3,8 @@ import { NaturalNumber } from "../../types/natural-numbers.types";
 import { Coordinates, Tuple } from "../../types/tuples.types";
 import { MutableMultidemsionalArray } from "./multidim-array.interface";
 
-export class Tensor<T, N extends NaturalNumber> implements MutableMultidemsionalArray<T, N> {
+export class Tensor<T, N extends NaturalNumber>
+	implements MutableMultidemsionalArray<T, N> {
 	public readonly shape: Tuple<number, N>;
 	private readonly array: T[];
 	public readonly size: number;
@@ -75,9 +76,14 @@ export class Tensor<T, N extends NaturalNumber> implements MutableMultidemsional
 	}
 
 	private fromCoords(coords: Coordinates<N>): number {
-		if (coords.some(x => typeof x !== "number" || !(x >= 0) || x !== Math.round(x))) {
+		if (
+			coords.some(
+				x => typeof x !== "number" || !(x >= 0) || x !== Math.round(x)
+			)
+		) {
 			throw new IllegalOperationError(
-				"coords must be all non-negative whole numbers, but was " + JSON.stringify(coords)
+				"coords must be all non-negative whole numbers, but was " +
+					JSON.stringify(coords)
 			);
 		}
 		let n = 0;

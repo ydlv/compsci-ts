@@ -1,7 +1,10 @@
 import { Tuple } from "../types/tuples.types";
 
 export function product<T0>(s0: Iterable<T0>): Iterable<[T0]>;
-export function product<T0, T1>(s0: Iterable<T0>, s1: Iterable<T1>): Iterable<[T0, T1]>;
+export function product<T0, T1>(
+	s0: Iterable<T0>,
+	s1: Iterable<T1>
+): Iterable<[T0, T1]>;
 export function product<T0, T1, T2>(
 	s0: Iterable<T0>,
 	s1: Iterable<T1>,
@@ -74,16 +77,46 @@ export function* product(...sources: Iterable<any>[]): Iterable<any[]> {
 	}
 }
 
-export function combinations<T>(source: Iterable<T>, n: 0): Iterable<Tuple<T, 0>>;
-export function combinations<T>(source: Iterable<T>, n: 1): Iterable<Tuple<T, 1>>;
-export function combinations<T>(source: Iterable<T>, n: 2): Iterable<Tuple<T, 2>>;
-export function combinations<T>(source: Iterable<T>, n: 3): Iterable<Tuple<T, 3>>;
-export function combinations<T>(source: Iterable<T>, n: 4): Iterable<Tuple<T, 4>>;
-export function combinations<T>(source: Iterable<T>, n: 5): Iterable<Tuple<T, 5>>;
-export function combinations<T>(source: Iterable<T>, n: 6): Iterable<Tuple<T, 6>>;
-export function combinations<T>(source: Iterable<T>, n: 7): Iterable<Tuple<T, 7>>;
-export function combinations<T>(source: Iterable<T>, n: 8): Iterable<Tuple<T, 8>>;
-export function combinations<T>(source: Iterable<T>, n: 9): Iterable<Tuple<T, 9>>;
+export function combinations<T>(
+	source: Iterable<T>,
+	n: 0
+): Iterable<Tuple<T, 0>>;
+export function combinations<T>(
+	source: Iterable<T>,
+	n: 1
+): Iterable<Tuple<T, 1>>;
+export function combinations<T>(
+	source: Iterable<T>,
+	n: 2
+): Iterable<Tuple<T, 2>>;
+export function combinations<T>(
+	source: Iterable<T>,
+	n: 3
+): Iterable<Tuple<T, 3>>;
+export function combinations<T>(
+	source: Iterable<T>,
+	n: 4
+): Iterable<Tuple<T, 4>>;
+export function combinations<T>(
+	source: Iterable<T>,
+	n: 5
+): Iterable<Tuple<T, 5>>;
+export function combinations<T>(
+	source: Iterable<T>,
+	n: 6
+): Iterable<Tuple<T, 6>>;
+export function combinations<T>(
+	source: Iterable<T>,
+	n: 7
+): Iterable<Tuple<T, 7>>;
+export function combinations<T>(
+	source: Iterable<T>,
+	n: 8
+): Iterable<Tuple<T, 8>>;
+export function combinations<T>(
+	source: Iterable<T>,
+	n: 9
+): Iterable<Tuple<T, 9>>;
 export function combinations<T>(source: Iterable<T>, n: number): Iterable<T[]> {
 	const li = [...source];
 	function* combine(start: number, curr: T[]): Generator<T[]> {

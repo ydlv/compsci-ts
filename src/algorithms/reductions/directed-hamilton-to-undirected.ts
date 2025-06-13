@@ -1,6 +1,10 @@
 import { AssertionError } from "assert";
 import { addBidirectional } from "../../data-structures/graphs/graph-utils";
-import { Edge, EdgeMutableGraph, Graph } from "../../data-structures/graphs/graph.interface";
+import {
+	Edge,
+	EdgeMutableGraph,
+	Graph
+} from "../../data-structures/graphs/graph.interface";
 import { MatrixGraph } from "../../data-structures/graphs/matrix-graph";
 import { list } from "../../util/iterables";
 import { product } from "../../util/iteration-utils";
@@ -8,13 +12,18 @@ import { AbstractReduction } from "./reduction";
 
 type N = 1 | 2 | 3;
 
-export class DirectedHamiltonToUndirected<V, E extends Edge<V> = Edge<V>> extends AbstractReduction<
+export class DirectedHamiltonToUndirected<
+	V,
+	E extends Edge<V> = Edge<V>
+> extends AbstractReduction<
 	Graph<V, E>,
 	readonly V[],
 	Graph<[V, N]>,
 	readonly [V, N][]
 > {
-	convertInput(g: Graph<V, E>): Graph<[V, N], { readonly from: [V, N]; readonly to: [V, N] }> {
+	convertInput(
+		g: Graph<V, E>
+	): Graph<[V, N], { readonly from: [V, N]; readonly to: [V, N] }> {
 		const nodes = list(g.nodes());
 		const reducedNode: [V, N][] = [...product(nodes, [1, 2, 3] as N[])];
 		const g2: EdgeMutableGraph<[V, N]> = new MatrixGraph(reducedNode, {

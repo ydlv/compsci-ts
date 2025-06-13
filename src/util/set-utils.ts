@@ -25,7 +25,10 @@ export function intersect<T>(...sets: ReadonlySet<T>[]): DeepSet<T> {
 	return ret;
 }
 
-export function without<T>(left: ReadonlySet<T>, right: ReadonlySet<T>): DeepSet<T> {
+export function without<T>(
+	left: ReadonlySet<T>,
+	right: ReadonlySet<T>
+): DeepSet<T> {
 	const ret: DeepSet<T> = new DeepSet();
 	for (const k of left.keys()) {
 		if (!right.has(k)) {

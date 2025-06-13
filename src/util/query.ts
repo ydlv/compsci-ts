@@ -27,7 +27,9 @@ export class Query<T> implements Iterable<T> {
 	}
 
 	toSet(equalityType: EqualityType = "structural") {
-		return tap(set(equalityType), s => forEach(this.toIterable(), x => s.add(x)));
+		return tap(set(equalityType), s =>
+			forEach(this.toIterable(), x => s.add(x))
+		);
 	}
 
 	toMap<V>(value: UnaryOperator<T, V>): DeepMap<T, V> {
@@ -140,7 +142,9 @@ export class Query<T> implements Iterable<T> {
 	}
 
 	first<TFallback = T>(props: { fallbackValue: TFallback }): T | TFallback;
-	first<TFallback = T>(props: { fallbackFactory: () => TFallback }): T | TFallback;
+	first<TFallback = T>(props: {
+		fallbackFactory: () => TFallback;
+	}): T | TFallback;
 	first(props: { ifNoneThrow: () => Error }): T;
 	first(): T;
 	first<TFallback = T>(props?: {
@@ -160,11 +164,15 @@ export class Query<T> implements Iterable<T> {
 			throw props.ifNoneThrow();
 		}
 
-		return props.fallbackFactory ? props.fallbackFactory() : props.fallbackValue;
+		return props.fallbackFactory
+			? props.fallbackFactory()
+			: props.fallbackValue;
 	}
 
 	single<TFallback = T>(props: { fallbackValue: TFallback }): T | TFallback;
-	single<TFallback = T>(props: { fallbackFactory: () => TFallback }): T | TFallback;
+	single<TFallback = T>(props: {
+		fallbackFactory: () => TFallback;
+	}): T | TFallback;
 	single(props: { ifNoneThrow: () => Error }): T;
 	single(): T;
 	single<TFallback = T>(props?: {
@@ -177,7 +185,8 @@ export class Query<T> implements Iterable<T> {
 		for (const x of this) {
 			if (found) {
 				throw new IllegalOperationError(
-					"single was called on a Query that has two or more elements: " + [x, value]
+					"single was called on a Query that has two or more elements: " +
+						[x, value]
 				);
 			} else {
 				found = true;
@@ -197,12 +206,19 @@ export class Query<T> implements Iterable<T> {
 			throw props.ifNoneThrow();
 		}
 
-		return props.fallbackFactory ? props.fallbackFactory() : props.fallbackValue;
+		return props.fallbackFactory
+			? props.fallbackFactory()
+			: props.fallbackValue;
 	}
 
-	sortBy<K = T>(key: UnaryOperator<T, K>, order: "ascending" | "descending" = "ascending") {
+	sortBy<K = T>(
+		key: UnaryOperator<T, K>,
+		order: "ascending" | "descending" = "ascending"
+	) {
 		return query(() => {
-			const arr = orderBy(this.toArray(), key, [order === "ascending" ? "asc" : "desc"]);
+			const arr = orderBy(this.toArray(), key, [
+				order === "ascending" ? "asc" : "desc"
+			]);
 			return query(arr);
 		});
 	}

@@ -2,7 +2,10 @@ import { random, range, remove, shuffle } from "lodash";
 import { HamiltonToSat } from "../../../src/algorithms/reductions/hamilton-to-sat";
 import { DirectedHamiltonToUndirected } from "../../../src/algorithms/reductions/directed-hamilton-to-undirected";
 import { createReduction } from "../../../src/algorithms/reductions/reduction";
-import { EdgeMutableGraph, Graph } from "../../../src/data-structures/graphs/graph.interface";
+import {
+	EdgeMutableGraph,
+	Graph
+} from "../../../src/data-structures/graphs/graph.interface";
 import { addBidirectional } from "../../../src/data-structures/graphs/graph-utils";
 import { MatrixGraph } from "../../../src/data-structures/graphs/matrix-graph";
 import { solve } from "../../../src/util/sat-utils";

@@ -34,18 +34,27 @@ export class HamiltonToSat<V> extends AbstractReduction<
 		const exactlyOneForNumber = (i: number) =>
 			exactlyOne(...nodes.map(v => this.variableFor([v, i])));
 
-		const exactlyOneForEachNumber = and(...range(N).map(i => exactlyOneForNumber(i)));
+		const exactlyOneForEachNumber = and(
+			...range(N).map(i => exactlyOneForNumber(i))
+		);
 
 		const edgeForEveryPair: Formula[] = [];
 		for (const [i, from, to] of product(range(N), nodes, nodes)) {
 			if (!g.hasEdge(from, to)) {
 				edgeForEveryPair.push(
-					atMostOne(this.variableFor([from, i]), this.variableFor([to, (i + 1) % N]))
+					atMostOne(
+						this.variableFor([from, i]),
+						this.variableFor([to, (i + 1) % N])
+					)
 				);
 			}
 		}
 
-		return and(exactlyOneForEachNode, exactlyOneForEachNumber, edgeForEveryPair);
+		return and(
+			exactlyOneForEachNode,
+			exactlyOneForEachNumber,
+			edgeForEveryPair
+		);
 	}
 
 	convertOutput(sol: Solution | null): readonly V[] {

@@ -1,7 +1,8 @@
 import { NaturalNumber } from "../../types/natural-numbers.types";
 import { Coordinates } from "../../types/tuples.types";
 
-export interface MultidimensionalArray<T, N extends NaturalNumber> extends Iterable<T> {
+export interface MultidimensionalArray<T, N extends NaturalNumber>
+	extends Iterable<T> {
 	get(...coordinates: Coordinates<N>): T;
 	readonly shape: Coordinates<N>;
 	readonly order: N;

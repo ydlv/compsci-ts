@@ -1,4 +1,8 @@
-import { Predicate, Supplier, UnaryOperator } from "../../types/functional.types";
+import {
+	Predicate,
+	Supplier,
+	UnaryOperator
+} from "../../types/functional.types";
 
 type UpsertParams<T> = {
 	find: Predicate<T>;
@@ -6,7 +10,10 @@ type UpsertParams<T> = {
 	insert: Supplier<T>;
 };
 
-export function upsert<T>(array: T[], { find, update, insert }: UpsertParams<T>): T {
+export function upsert<T>(
+	array: T[],
+	{ find, update, insert }: UpsertParams<T>
+): T {
 	const i = array.findIndex(find);
 	let ret: T;
 	if (i < 0) {

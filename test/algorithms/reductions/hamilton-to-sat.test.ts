@@ -40,7 +40,12 @@ describe("Hamilton to SAT reduction", () => {
 
 	test("returns empty for graph without Hamiltonian path", () => {
 		const N = 20;
-		const g: EdgeMutableGraph<number | string> = new MatrixGraph([...range(N), "A", "B", "C"]);
+		const g: EdgeMutableGraph<number | string> = new MatrixGraph([
+			...range(N),
+			"A",
+			"B",
+			"C"
+		]);
 
 		// generate a Hamiltonian graph by Dirac theorem - forall v, rank(v) >= N/2
 		for (const v of range(N)) {

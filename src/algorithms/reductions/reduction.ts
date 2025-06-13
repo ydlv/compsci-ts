@@ -32,7 +32,12 @@ export abstract class AbstractReduction<X1, Y1, X2, Y2 = Y1> {
 	}
 }
 
-export class Reduction<X1, Y1, X2, Y2 = Y1> extends AbstractReduction<X1, Y1, X2, Y2> {
+export class Reduction<X1, Y1, X2, Y2 = Y1> extends AbstractReduction<
+	X1,
+	Y1,
+	X2,
+	Y2
+> {
 	private readonly inputConverter: UnaryOperator<X1, X2>;
 	private readonly outputConverter: UnaryOperator<Y2, Y1>;
 

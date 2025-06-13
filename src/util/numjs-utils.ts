@@ -3,7 +3,11 @@ import { ArgumentError } from "../errors/argument-error";
 
 /* tslint:disable:variable-name */
 
-export function matmul(A: NdArray, B: NdArray, dtype?: NdType<number>): NdArray {
+export function matmul(
+	A: NdArray,
+	B: NdArray,
+	dtype?: NdType<number>
+): NdArray {
 	if (A.shape.length !== 2) {
 		throw new ArgumentError(`A shape was ${A.shape}, which is not a matrix`);
 	}
@@ -15,7 +19,9 @@ export function matmul(A: NdArray, B: NdArray, dtype?: NdType<number>): NdArray 
 	const [m_, k] = B.shape;
 
 	if (m_ !== m) {
-		throw new ArgumentError(`Matrix dimensions don't match: ${A.shape} x ${B.shape}`);
+		throw new ArgumentError(
+			`Matrix dimensions don't match: ${A.shape} x ${B.shape}`
+		);
 	}
 
 	const C = empty([n, k], dtype);

@@ -1,5 +1,8 @@
 import { example0 } from "../../../examples/graphs";
-import { EdgeMutableGraph, Edge } from "../../../../src/data-structures/graphs/graph.interface";
+import {
+	EdgeMutableGraph,
+	Edge
+} from "../../../../src/data-structures/graphs/graph.interface";
 import { MatrixGraph } from "../../../../src/data-structures/graphs/matrix-graph";
 import { dijkstra } from "../../../../src/algorithms/graph/lightest-paths/dijkstra";
 import { expect, test, describe } from "bun:test";
@@ -21,6 +24,8 @@ describe("dijkstra", () => {
 	test("throws when graph has negative edge", () => {
 		const g = example0();
 		g.setEdge({ from: "A", to: "B", weight: -1 });
-		expect(() => dijkstra(g, "A", w => w.weight)).toThrow(/^.*negative.*-1.*$/gi);
+		expect(() => dijkstra(g, "A", w => w.weight)).toThrow(
+			/^.*negative.*-1.*$/gi
+		);
 	});
 });

@@ -53,10 +53,6 @@
   "main": "dist/compsci-ts.umd.js",
   "module": "dist/compsci-ts.es5.js",
   "name": "compsci-ts",
-  "prettier": {
-    "semi": false,
-    "singleQuote": true
-  },
   "private": true,
   "repository": {
     "type": "git",

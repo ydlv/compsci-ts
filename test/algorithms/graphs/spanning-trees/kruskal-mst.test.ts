@@ -8,7 +8,10 @@ import { query } from "../../../../src/util/query";
 describe("kruskalMST", () => {
 	test("finds MST", () => {
 		// example from https://www.geeksforgeeks.org/dsa/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/
-		const g = new MatrixGraph<number, Edge<number> & { readonly weight: number }>(range(9));
+		const g = new MatrixGraph<
+			number,
+			Edge<number> & { readonly weight: number }
+		>(range(9));
 
 		const edges: [number, number, number][] = [
 			[0, 1, 4],
@@ -33,7 +36,11 @@ describe("kruskalMST", () => {
 		}
 
 		const mst = query(kruskalMST(g, e => e.weight))
-			.select(({ from, to, weight }) => [Math.min(from, to), Math.max(from, to), weight])
+			.select(({ from, to, weight }) => [
+				Math.min(from, to),
+				Math.max(from, to),
+				weight
+			])
 			.select(([from, to, weight]) => `${from}--${to}:${weight}`)
 			.sort()
 			.toArray();

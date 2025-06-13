@@ -24,34 +24,39 @@ interface KnapsackProblemSolution {
  * all weights and the knapsack's capacity by their gcd, if
  * it is not 1.
  */
-export function knapsack({ artifacts, capacity }: KnapsackProblem): [Artifact[], number] {
+export function knapsack({
+	artifacts,
+	capacity
+}: KnapsackProblem): [Artifact[], number] {
 	// subproblem: for j, W, let opt(j, W) be the solution for artifacts[0..<j], W
-	const opt: (j: number, W: number) => KnapsackProblemSolution = memoize(function(j, W) {
-		if (j === 0) {
-			return {
-				artifacts: [],
-				totalPrice: 0
+	const opt: (j: number, W: number) => KnapsackProblemSolution = memoize(
+		function(j, W) {
+			if (j === 0) {
+				return {
+					artifacts: [],
+					totalPrice: 0
+				};
+			}
+
+			const { price: pJ, weight: wJ } = artifacts[j - 1];
+			if (wJ > W) {
+				return opt(j - 1, W);
+			}
+
+			const dontPick = opt(j - 1, W);
+			const subsolution = opt(j - 1, W - wJ);
+			const pick: KnapsackProblemSolution = {
+				artifacts: [...subsolution.artifacts, artifacts[j - 1]],
+				totalPrice: subsolution.totalPrice + pJ
 			};
+
+			if (dontPick.totalPrice > pick.totalPrice) {
+				return dontPick;
+			}
+
+			return pick;
 		}
-
-		const { price: pJ, weight: wJ } = artifacts[j - 1];
-		if (wJ > W) {
-			return opt(j - 1, W);
-		}
-
-		const dontPick = opt(j - 1, W);
-		const subsolution = opt(j - 1, W - wJ);
-		const pick: KnapsackProblemSolution = {
-			artifacts: [...subsolution.artifacts, artifacts[j - 1]],
-			totalPrice: subsolution.totalPrice + pJ
-		};
-
-		if (dontPick.totalPrice > pick.totalPrice) {
-			return dontPick;
-		}
-
-		return pick;
-	});
+	);
 
 	const { artifacts: subset, totalPrice } = opt(artifacts.length, capacity);
 	return [subset, totalPrice];

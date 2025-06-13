@@ -55,7 +55,10 @@ describe("AdjacencyListMatrix", () => {
 	});
 
 	test("has correct iterator for edges", () => {
-		const g: AdjacencyListMatrix<symbol, LabeledEdge<symbol>> = new AdjacencyListMatrix([a, b, c]);
+		const g: AdjacencyListMatrix<
+			symbol,
+			LabeledEdge<symbol>
+		> = new AdjacencyListMatrix([a, b, c]);
 		const ab: LabeledEdge<symbol> = { from: a, to: b, label: "ab" },
 			bc: LabeledEdge<symbol> = { from: b, to: c, label: "bc" };
 		g.setEdge(bc);

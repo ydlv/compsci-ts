@@ -3,7 +3,10 @@ import { subsetSumPositiveIntegers } from "../../../src/algorithms/dynamic-progr
 
 describe("subsetSumPositiveIntegers", () => {
 	test("subsetSum: positive case — solution exists", () => {
-		const result = subsetSumPositiveIntegers({ elements: [3, 34, 4, 12, 5, 2], sum: 9 });
+		const result = subsetSumPositiveIntegers({
+			elements: [3, 34, 4, 12, 5, 2],
+			sum: 9
+		});
 		expect(result).toBeDefined();
 
 		const values = result!.map(i => [3, 34, 4, 12, 5, 2][i]);
@@ -12,7 +15,10 @@ describe("subsetSumPositiveIntegers", () => {
 	});
 
 	test("subsetSum: negative case — no solution", () => {
-		const result = subsetSumPositiveIntegers({ elements: [3, 34, 4, 12, 5, 2], sum: 30 });
+		const result = subsetSumPositiveIntegers({
+			elements: [3, 34, 4, 12, 5, 2],
+			sum: 30
+		});
 		expect(result).toBeUndefined();
 	});
 

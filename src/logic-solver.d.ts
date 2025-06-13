@@ -124,9 +124,19 @@ declare module "logic-solver" {
 
 		getVarNum(vname: any, noCreate: any, _createInternals: any): any;
 
-		maximizeWeightedSum(solution: any, costTerms: any, costWeights: any, options: any): any;
+		maximizeWeightedSum(
+			solution: any,
+			costTerms: any,
+			costWeights: any,
+			options: any
+		): any;
 
-		minimizeWeightedSum(solution: any, costTerms: any, costWeights: any, options: any): any;
+		minimizeWeightedSum(
+			solution: any,
+			costTerms: any,
+			costWeights: any,
+			options: any
+		): any;
 
 		require(...args: any[]): void;
 

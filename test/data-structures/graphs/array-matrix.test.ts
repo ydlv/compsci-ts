@@ -48,7 +48,11 @@ describe("ArrayMatrix", () => {
 	});
 
 	test("has correct iterator for edges", () => {
-		const g: MatrixGraph<symbol, LabeledEdge<symbol>> = new MatrixGraph([a, b, c]);
+		const g: MatrixGraph<symbol, LabeledEdge<symbol>> = new MatrixGraph([
+			a,
+			b,
+			c
+		]);
 		const ab: LabeledEdge<symbol> = { from: a, to: b, label: "ab" },
 			bc: LabeledEdge<symbol> = { from: b, to: c, label: "bc" };
 		g.setEdge(bc);

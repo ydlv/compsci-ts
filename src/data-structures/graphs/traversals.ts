@@ -4,7 +4,10 @@ import { LinkedStack } from "../stacks/linked-stack";
 import { Stack } from "../stacks/stack.interface";
 import { Edge, Graph } from "./graph.interface";
 
-export function* bfs<V, E extends Edge<V>>(g: Graph<V, E>, starting: V): Iterable<V> {
+export function* bfs<V, E extends Edge<V>>(
+	g: Graph<V, E>,
+	starting: V
+): Iterable<V> {
 	const q: Queue<V> = new LinkedQueue();
 	const seen: Set<V> = new Set();
 	q.enqueue(starting);
@@ -20,7 +23,10 @@ export function* bfs<V, E extends Edge<V>>(g: Graph<V, E>, starting: V): Iterabl
 	}
 }
 
-export function* dfs<V, E extends Edge<V>>(g: Graph<V, E>, starting: V): Iterable<V> {
+export function* dfs<V, E extends Edge<V>>(
+	g: Graph<V, E>,
+	starting: V
+): Iterable<V> {
 	const s: Stack<V> = new LinkedStack();
 	const seen: Set<V> = new Set();
 	s.push(starting);

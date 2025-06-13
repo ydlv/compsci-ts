@@ -21,7 +21,14 @@ export function example0() {
 		"ED2",
 		"FE1"
 	];
-	const g: EdgeMutableGraph<V, E> = new MatrixGraph<V, E>(["A", "B", "C", "D", "E", "F"]);
+	const g: EdgeMutableGraph<V, E> = new MatrixGraph<V, E>([
+		"A",
+		"B",
+		"C",
+		"D",
+		"E",
+		"F"
+	]);
 
 	for (const s of edges) {
 		const u = s.charAt(0) as UppercaseLetter;
@@ -35,7 +42,13 @@ export function example0() {
 
 export function weighedDAGExample() {
 	const edges: string[] = ["SA16", "SD3", "AB7", "CB5", "DA10", "DB7", "DC-2"];
-	const g: EdgeMutableGraph<V, E> = new MatrixGraph<V, E>(["A", "B", "C", "D", "S"]);
+	const g: EdgeMutableGraph<V, E> = new MatrixGraph<V, E>([
+		"A",
+		"B",
+		"C",
+		"D",
+		"S"
+	]);
 
 	for (const s of edges) {
 		const u = s.charAt(0) as UppercaseLetter;

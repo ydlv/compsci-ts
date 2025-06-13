@@ -1,18 +1,33 @@
 import { describe, expect, test } from "bun:test";
-import { Artifact, fractionalKnapsack } from "../../../src/algorithms/greedy/fractional-knapsack";
+import {
+	Artifact,
+	fractionalKnapsack
+} from "../../../src/algorithms/greedy/fractional-knapsack";
 
 describe("knapsack", () => {
 	test("returns ∅ for ∅", () => {
-		const { artifacts, totalWorth } = fractionalKnapsack({ artifacts: [], capacity: 5 });
+		const { artifacts, totalWorth } = fractionalKnapsack({
+			artifacts: [],
+			capacity: 5
+		});
 		expect(artifacts.length).toBe(0);
 		expect(totalWorth).toBe(0);
 	});
 
 	test("returns {a} for singleton {a} when a can fit in knapsack", () => {
 		const artifacts: Artifact[] = [{ price: 10, weight: 5 }];
-		const { artifacts: subset, totalWorth } = fractionalKnapsack({ artifacts, capacity: 5 });
+		const { artifacts: subset, totalWorth } = fractionalKnapsack({
+			artifacts,
+			capacity: 5
+		});
 		expect(subset).toEqual([
-			{ price: 10, weight: 5, fraction: 1, fractionalWeight: 5, fractionalPrice: 10 }
+			{
+				price: 10,
+				weight: 5,
+				fraction: 1,
+				fractionalWeight: 5,
+				fractionalPrice: 10
+			}
 		]);
 		expect(totalWorth).toEqual(10);
 	});
@@ -61,9 +76,27 @@ describe("knapsack", () => {
 		artifacts.sort((x, y) => x.price - y.price); // A, B, C
 		expect(totalWorth).toBe(220);
 		expect(artifacts).toEqual([
-			{ weight: 10, price: 60, fraction: 1, fractionalPrice: 60, fractionalWeight: 10 }, // A
-			{ weight: 20, price: 100, fraction: 1, fractionalPrice: 100, fractionalWeight: 20 }, // B
-			{ weight: 40, price: 120, fraction: 0.5, fractionalPrice: 60, fractionalWeight: 20 } // C, 1 half
+			{
+				weight: 10,
+				price: 60,
+				fraction: 1,
+				fractionalPrice: 60,
+				fractionalWeight: 10
+			}, // A
+			{
+				weight: 20,
+				price: 100,
+				fraction: 1,
+				fractionalPrice: 100,
+				fractionalWeight: 20
+			}, // B
+			{
+				weight: 40,
+				price: 120,
+				fraction: 0.5,
+				fractionalPrice: 60,
+				fractionalWeight: 20
+			} // C, 1 half
 		]);
 	});
 });

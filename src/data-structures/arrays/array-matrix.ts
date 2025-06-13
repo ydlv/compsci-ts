@@ -1,7 +1,8 @@
 import { range } from "lodash";
 import { MutableMatrix } from "./matrix.interface";
 
-export class ArrayMatrix<R extends number, C extends number> implements MutableMatrix<R, C> {
+export class ArrayMatrix<R extends number, C extends number>
+	implements MutableMatrix<R, C> {
 	readonly shape: [R, C];
 	readonly size: number;
 	private readonly array: number[][];
@@ -13,7 +14,9 @@ export class ArrayMatrix<R extends number, C extends number> implements MutableM
 		this.array = range(rows).map(() => Array(columns).fill(0));
 	}
 
-	map(mapper: (value: number, row: number, column: number) => number): MutableMatrix<R, C> {
+	map(
+		mapper: (value: number, row: number, column: number) => number
+	): MutableMatrix<R, C> {
 		const ret: ArrayMatrix<R, C> = new ArrayMatrix(this.rows, this.columns);
 		for (const coords of this.coordinates()) {
 			ret.set(coords, mapper(this.get(...coords), ...coords));

@@ -79,8 +79,13 @@ export function weighedActivitySelection(
 			};
 		}
 		const optionWithoutJ: WeighedActivitySelection = opt(j - 1);
-		const optionWithJ: WeighedActivitySelection = addOne(opt(p(j)), activities[j]);
-		return optionWithJ.totalWeight > optionWithoutJ.totalWeight ? optionWithJ : optionWithoutJ;
+		const optionWithJ: WeighedActivitySelection = addOne(
+			opt(p(j)),
+			activities[j]
+		);
+		return optionWithJ.totalWeight > optionWithoutJ.totalWeight
+			? optionWithJ
+			: optionWithoutJ;
 	});
 
 	const ret = opt(activities.length);

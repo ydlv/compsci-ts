@@ -1,4 +1,7 @@
-import { knapsack, Artifact } from "../../../src/algorithms/dynamic-programming/knapsack";
+import {
+	knapsack,
+	Artifact
+} from "../../../src/algorithms/dynamic-programming/knapsack";
 import { expect, test, describe } from "bun:test";
 
 describe("knapsack", () => {

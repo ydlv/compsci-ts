@@ -3,13 +3,17 @@ import { EqualityType, map } from "./equality-type";
 
 const sentinel = Symbol("sentinel");
 
-export class IdHelper<T, TId extends string | number = string> implements IdHelper<T, TId> {
+export class IdHelper<T, TId extends string | number = string>
+	implements IdHelper<T, TId> {
 	private readonly id2obj: T[];
 	private readonly obj2id: Map<T, TId>;
 	private readonly isString: TId extends string ? true : false;
 	private readonly prefix?: string;
 
-	constructor(type: StringConstructor, options: { prefix?: string; equalityType: EqualityType });
+	constructor(
+		type: StringConstructor,
+		options: { prefix?: string; equalityType: EqualityType }
+	);
 	constructor(type: NumberConstructor, options: { equalityType: EqualityType });
 	constructor(
 		type: StringConstructor | NumberConstructor = String,

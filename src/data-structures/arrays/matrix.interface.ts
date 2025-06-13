@@ -1,4 +1,7 @@
-import { MultidimensionalArray, MutableMultidemsionalArray } from "./multidim-array.interface";
+import {
+	MultidimensionalArray,
+	MutableMultidemsionalArray
+} from "./multidim-array.interface";
 
 export interface Matrix<R extends number, C extends number>
 	extends MultidimensionalArray<number, 2> {
@@ -10,12 +13,15 @@ export interface Matrix<R extends number, C extends number>
 	readonly rows: R;
 	readonly columns: C;
 	coordinates(): Iterable<[number, number]>;
-	map(mapper: (value: number, row: number, column: number) => number): Matrix<R, C>;
+	map(
+		mapper: (value: number, row: number, column: number) => number
+	): Matrix<R, C>;
 }
 
-export interface MutableMatrix<R extends number = number, C extends number = number>
-	extends Matrix<R, C>,
-		MutableMultidemsionalArray<number, 2> {
+export interface MutableMatrix<
+	R extends number = number,
+	C extends number = number
+> extends Matrix<R, C>, MutableMultidemsionalArray<number, 2> {
 	getDimension(dim: 0): R;
 	getDimension(dim: 1): C;
 	readonly shape: [R, C];
@@ -23,5 +29,7 @@ export interface MutableMatrix<R extends number = number, C extends number = num
 	set(coordinates: [number, number], element: number): void;
 	fill(value: number): void;
 	populate(map: (coords: [number, number]) => number): void;
-	map(mapper: (value: number, row: number, column: number) => number): MutableMatrix<R, C>;
+	map(
+		mapper: (value: number, row: number, column: number) => number
+	): MutableMatrix<R, C>;
 }

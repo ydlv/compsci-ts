@@ -1,10 +1,10 @@
 {
   "$schema": "https://www.schemastore.org/tslint.json",
   "extends": [
-    "tslint-config-standard",
-    "tslint-config-prettier"
+    "tslint-config-standard"
   ],
   "rules": {
+    "semicolon": true,
     "unified-signatures": false
   }
 }
