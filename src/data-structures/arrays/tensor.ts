@@ -1,3 +1,4 @@
+import { tap } from "lodash";
 import { IllegalOperationError } from "../../errors/illegal-operation.error";
 import { NaturalNumber } from "../../types/natural-numbers.types";
 import { Coordinates, Tuple } from "../../types/tuples.types";
@@ -21,6 +22,12 @@ export class Tensor<T, N extends NaturalNumber>
 
 	[Symbol.iterator](): Iterator<T, any, any> {
 		return this.array[Symbol.iterator]();
+	}
+
+	reshape<K extends NaturalNumber>(
+		...newShape: Coordinates<K>
+	): MutableMultidemsionalArray<T, K> {
+		return tap(new Tensor(...newShape));
 	}
 
 	getDimension(dim: number): number {

@@ -8,6 +8,9 @@ export interface MultidimensionalArray<T, N extends NaturalNumber>
 	readonly order: N;
 	getDimension(dim: number): number;
 	coordinates(): Iterable<Coordinates<N>>;
+	reshape<K extends NaturalNumber>(
+		...newShape: Coordinates<K>
+	): MultidimensionalArray<T, K>;
 }
 
 export interface MutableMultidemsionalArray<T, N extends NaturalNumber>
@@ -20,4 +23,7 @@ export interface MutableMultidemsionalArray<T, N extends NaturalNumber>
 	 * Element count (product of shape)
 	 */
 	size: number;
+	reshape<K extends NaturalNumber>(
+		...newShape: Coordinates<K>
+	): MutableMultidemsionalArray<T, K>;
 }

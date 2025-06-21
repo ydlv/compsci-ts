@@ -13,7 +13,8 @@
   "dependencies": {
     "lodash": "^4.17.21",
     "logic-solver": "^2.0.1",
-    "numjs": "^0.16.1"
+    "numjs": "^0.16.1",
+    "sharp": "^0.34.2"
   },
   "description": "",
   "devDependencies": {

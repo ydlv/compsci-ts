@@ -155,3 +155,11 @@ export function forEach<T>(source: Iterable<T>, callback: (x: T) => any): void {
 		callback(x);
 	}
 }
+
+export function* enumerate<T>(src: Iterable<T>): Iterable<[number, T]> {
+	let i = 0;
+	for (const t of src) {
+		yield [i, t];
+		i += 1;
+	}
+}
